@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chọn Độ Tuổi & Nhận Lời Chúc</title>
+    <link rel="stylesheet" href="lixi.css">
+</head>
+<body>
+    <header>
+        <h1>Chọn Độ Tuổi & Nhận Lời Chúc</h1>
+    </header>
+    <main>
+        <form id="ageForm">
+            <label for="age">Chọn độ tuổi:</label>
+            <select id="age" name="age">
+                <option value="kid">Trẻ em (dưới 12 tuổi)</option>
+                <option value="teen">Thanh thiếu niên (13-18 tuổi)</option>
+                <option value="adult">Người lớn (19-50 tuổi)</option>
+                <option value="senior">Người cao tuổi (trên 50 tuổi)</option>
+            </select>
+            <button type="submit">Nhận lời chúc</button>
+        </form>
+        <div id="message" class="hidden"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Chúc Mừng Năm Mới. Tất cả các quyền được bảo lưu.</p>
+    </footer>
+    <script src="lixi.js"></script>
+</body>
+</html>
