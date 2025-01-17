@@ -84,7 +84,7 @@ form:focus-within {
 /* Container cho mã QR */
 .qr-container {
     text-align: center;
-    padding: 20px;
+    padding: 10%;
     background-color: #fff5e6; /* Màu nền nhẹ nhàng */
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -104,8 +104,8 @@ form:focus-within {
 
 /* Mã QR */
 .qr-img {
-    width: 200px;
-    height: 200px;
+    width: 80%;
+    height: 80%;
     border-radius: 10px; /* Bo góc mềm mại */
     transition: transform 0.3s ease;
 }

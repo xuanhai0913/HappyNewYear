@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đoán Chữ Tết</title>
+    <link rel="stylesheet" href="dc.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Trò chơi "Đoán chữ Tết"</h1>
+        <p id="hint">Gợi ý: </p>
+        <input type="text" id="answer" placeholder="Nhập câu trả lời">
+        <button onclick="checkAnswer()">Kiểm tra</button>
+        <div id="result" class="hidden">
+            <p id="result-message"></p>
+            <button onclick="nextQuestion()">Câu hỏi tiếp theo</button>
+        </div>
+    </div>
+    <script src="dc.js"></script>
+</body>
+</html>

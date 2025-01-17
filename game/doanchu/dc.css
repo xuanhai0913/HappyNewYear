@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../../img/game.jpg');
+    background-size: cover; /* Đảm bảo ảnh phủ hết trang */
+    background-position: center; /* Đặt ảnh ở trung tâm */
+    background-repeat: no-repeat; 
+    color: #d32f2f;
+    text-align: center;
+    padding: 20px;
+}
+
+.game-container {
+    padding: 30px;
+    background-color: rgb(255, 166, 111);
+    border-radius: 120px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #388e3c;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    font-size: 1rem;
+    border: 2px solid #388e3c;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #388e3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2c6b2f;
+}
+
+.hidden {
+    display: none;
+}
