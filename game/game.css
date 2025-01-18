@@ -13,9 +13,10 @@ h1 {
 }
 
 table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: 20px auto; /* Căn giữa bảng trên trang */
+    max-width: 45em;
 }
 
 th, td {

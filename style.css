@@ -754,6 +754,9 @@ button:hover {
       
       .tabs {
         overflow: hidden;
+        margin: 20px auto; /* Căn giữa bảng trên trang */
+        max-width: 60em;
+        width: 90%;
       }
       
       .tablinks {
@@ -776,6 +779,9 @@ button:hover {
         display: none;
         padding: 20px;
         border-top: none;
+        width: 75%;
+        max-width: 60em; /* Giới hạn chiều rộng tối đa của nội dung tab */
+        margin: 0 auto; /* Căn giữa nội dung tab */
       }
       
       #BIDV {
