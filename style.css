@@ -779,9 +779,10 @@ button:hover {
         display: none;
         padding: 20px;
         border-top: none;
-        width: 75%;
+        width: 70%;
         max-width: 60em; /* Giới hạn chiều rộng tối đa của nội dung tab */
         margin: 0 auto; /* Căn giữa nội dung tab */
+        min-width: 10em;
       }
       
       #BIDV {
