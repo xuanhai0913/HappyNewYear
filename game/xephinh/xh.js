@@ -18,6 +18,11 @@ function giveLuckyMoney() {
     // Ẩn nút nhận lì xì
     lixiButton.disabled = true; // Vô hiệu hóa nút
     lixiButton.textContent = "Đã nhận lì xì"; // Thay đổi văn bản nút
+        const celebrationGif = document.getElementById("celebrationGif");
+    celebrationGif.classList.remove("hidden"); // Hiển thị GIF
+
+    // Tắt hiệu ứng pháo hoa sau khi nhận lì xì
+    fireworks.style.display = "none"; // Ẩn phần tử pháo hoa nếu cần
 }
     //<![CDATA[
         var pictureSrc = "https://img.lovepik.com/element/40054/0068.png_860.png"; //Link ảnh hoa muốn hiển thị trên web

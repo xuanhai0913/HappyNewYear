@@ -10,12 +10,12 @@
     <div class="game-container">
         <h1>Trò chơi "Đoán chữ Tết"</h1>
         <p id="hint">Gợi ý: </p>
-        <input type="text" id="answer" placeholder="Nhập câu trả lời">
-        <button onclick="checkAnswer()">Kiểm tra</button>
+        <input type="text" id="answer" placeholder="Nhập câu trả lời của bạn">
+        <button onclick="checkAnswer()">Trả lời</button>
         <div id="result" class="hidden">
             <p id="result-message"></p>
-            <button onclick="nextQuestion()">Câu hỏi tiếp theo</button>
         </div>
+        <button id="next-btn" onclick="nextQuestion()" disabled>Tiếp theo</button>
     </div>
     <script src="dc.js"></script>
 </body>

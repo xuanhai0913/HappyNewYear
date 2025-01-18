@@ -510,7 +510,7 @@ fill:#1C2033;
 }
 h1 {
     font-family: 'Georgia', serif; /* Phông chữ đặc biệt */
-    font-size: 3em; /* Kích thước chữ lớn */
+    font-size: 4em; /* Kích thước chữ lớn */
     color: #ff6347; /* Màu sắc nổi bật (Tomato) */
     text-align: center; /* Căn giữa nội dung */
     background: linear-gradient(to right, #ff7e5f, #feb47b); /* Hiệu ứng gradient */
@@ -520,6 +520,16 @@ h1 {
     margin: 20px 0; /* Khoảng cách bên ngoài */
     padding: 10px; /* Khoảng cách bên trong */
 }
+h2 {
+        font-family: 'Georgia', serif; /* Phông chữ đặc biệt */
+        font-size: 2em; /* Kích thước chữ lớn */
+        color: #ff6347; /* Màu sắc nổi bật (Tomato) */
+        text-align: center; /* Căn giữa nội dung */
+        background: linear-gradient(to right, #ff7e5f, #feb47b); /* Hiệu ứng gradient */
+        -webkit-background-clip: text; /* Chỉ hiển thị gradient trên chữ */
+        -webkit-text-fill-color: transparent; /* Làm cho phần nền không hiển thị */
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Hiệu ứng bóng chữ */
+    }
 /* Các kiểu dáng cho phần Gieo Quẻ */
 #fortuneMessage {
     margin-top: 20px;
@@ -738,3 +748,119 @@ button:hover {
       padding: 8px;
     }
   }
+  body {
+        font-family: Arial, sans-serif;
+      }
+      
+      .tabs {
+        overflow: hidden;
+      }
+      
+      .tablinks {
+        background-color: #cc9757;
+        float: left;
+        border: none;
+        outline: none;
+        padding: 14px 16px;
+        cursor: pointer;
+        font-size: 17px;
+        width: 33.33%;
+        text-align: center;
+      }
+      
+      .tablinks:hover {
+        background-color: #d16c31;
+      }
+      
+      .tabcontent {
+        display: none;
+        padding: 20px;
+        border-top: none;
+      }
+      
+      #BIDV {
+        background-color: #034cac;
+      }
+      
+      #TPBank {
+        background-color: #7400c6;
+      }
+      
+      #Momo {
+        background-color: #cd00b5;
+      }
+/* CSS cho hiệu ứng nổi bật khi di chuột qua một hàng */
+table tr:hover {
+        background-color: #004bad;  /* Màu nền khi di chuột qua */
+        cursor: pointer;  /* Thay đổi con trỏ thành tay khi hover */
+      }
+      .container1 {
+        display: flex;
+        justify-content: center;  /* Căn giữa theo chiều ngang */
+        align-items: center;      /* Căn giữa theo chiều dọc */
+        height: 100vh;            /* Đặt chiều cao của container là 100% chiều cao màn hình */
+    }
+      .card { 
+        width: 210px;
+        height: 250px;
+        padding: 0.5rem;
+        background-image: url('img/bgr.webp');  /* Đường dẫn tới ảnh */
+        background-size: cover;      /* Đảm bảo ảnh phủ đầy toàn bộ màn hình */
+        background-position: center; /* Căn giữa ảnh */
+        background-repeat: no-repeat; /* Không lặp lại ảnh */        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+        border-left: 3px  rgba(255, 255, 255, 0.545) outset;
+        box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
+        transform: skewX(10deg);
+        transition: .4s;
+        overflow: hidden;
+        color: white;
+      }
+      
+      .card:hover {
+        width: 550px;
+        height: 450px;        
+        transform: skew(0deg);
+      }
+      
+      .align {
+        padding: 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-self: flex-start;
+      }
+      
+      .red {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ff605c;
+        box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+      }
+      
+      .yellow {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ffbd44;
+        box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+      }
+      
+      .green {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #00ca4e;
+        box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+      }
+      
+      .card h1 {
+        text-align: center;
+        margin: 1.3rem;
+        color: rgb(218, 244, 237);
+        text-shadow: -10px 5px 10px rgba(0, 0, 0, 0.573);
+      }
+      
+      

@@ -481,21 +481,29 @@
       
     </div>
         </div></a>
- 
-        <main>
-            <h1>Gieo Quẻ Tết</h1>
-
-            <p>Nhấn nút dưới đây để nhận lời chúc may mắn cho năm mới!</p>
-            
-            <button id="drawFortuneBtn" class="button">Gieo Quẻ  <div class="hoverEffect">
-<div></div> </div>           </button>
-            
-            <div id="fortuneMessage" class="hidden">
-                <p id="fortuneText"></p>
-            </div>
-        </main>
+ <br>
+ <div class="container1">
+    <div class="card">
+        <div class="align">
+            <span class="red"></span>
+            <span class="yellow"></span>
+            <span class="green"></span>
+        </div>            
+        <h2>Gieo Quẻ Tết</h2>
+        <button id="drawFortuneBtn" class="button">
+            Gieo Quẻ  
+            <div class="hoverEffect">
+                <div></div>
+            </div> 
+        </button>    <div id="fortuneMessage" class="hidden">
+        <p id="fortuneText"></p>
+    </div>
+    <div id="fortuneStatus" class="hidden" style="color: green; font-weight: bold;"></div>
         <div class="games-table-container">
-            <h1>Danh Sách Các Trò Chơi Tết</h1>
+    </div></div></div>
+
+
+            <h2>Danh Sách Các Trò Chơi Tết</h2>
             <table>
                 <thead>
                     <tr>
@@ -505,35 +513,65 @@
                         <th>Chơi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody> 
                     <tr>
                         <td>1</td>
-                        <td>Đoán Chữ Tết</td>
-                        <td>Đoán các câu hỏi liên quan đến Tết</td>
-                        <td><a href="game/doanchu/dc.html">Chơi ngay</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
                         <td>Lì Xì</td>
                         <td>Chơi game lì xì may mắn</td>
                         <td><a href="game/xephinh/xh.html">Chơi ngay</a></td>
                     </tr>
                     <tr>
+                        <td>2</td>
+                        <td>Đoán Chữ Tết</td>
+                        <td>Đoán các câu hỏi liên quan đến Tết</td>
+                        <td><a href="game/doanchu/dc.html">Chơi ngay</a></td>
+                    </tr>
+
+                    <tr>
                         <td>3</td>
-                        <td>Update...</td>
-                        <td>...</td>
-                        <td><a href="game3.html">Chơi ngay</a></td>
+                        <td>Kéo, búa, bao</td>
+                        <td>Đánh kéo, búa, bao với bot và hoàn toàn ramdom 😛</td>
+                        <td><a href="game/keobuabao/kbb.html">Chơi ngay</a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
-            <div class="qr-container">
+        <h2> Lì xì may mắn - Nhận lộc tại đây ❤️</h2>
+        
+        <p><em>
+            "Mừng xuân, mừng tuổi, mừng nhà mới,<br>
+            Mừng tài mừng lộc, mừng an khang."
+        </em></p>        
+        <div class="tabs">
+            <button class="tablinks" onclick="openTab(event, 'BIDV')">BIDV</button>
+            <button class="tablinks" onclick="openTab(event, 'TPBank')">TPBank</button>
+            <button class="tablinks" onclick="openTab(event, 'Momo')">Momo</button>
+        </div>
+        <div id="BIDV" class="tabcontent">
+            <h3>BIDV</h3>
+            <p>Lì xì qua BIDV.</p>
+            <img src="img/bidv.jpeg" alt="Momo QR Code" class="qr-img">
+        </div>
+          
+          <div id="TPBank" class="tabcontent">
+            <h3>TPBank</h3>
+            <p>Lì xì qua TPBank.</p>
+            <img src="img/tpbank.jpeg" alt="Momo QR Code" class="qr-img">
+          </div>
+          
+          <div id="Momo" class="tabcontent">
+            <h3>Momo</h3>
+            <p>Lì xì qua Momo.</p>
+            <img src="img/lixi.jpeg" alt="Momo QR Code" class="qr-img">
+          </div>
+          
+            <!--
+          <div class="qr-container">
             <p class="qr-text">Nhấn vào mã QR để chuyển lì xì qua Momo</p>
             <img src="img/lixi.jpeg" alt="Momo QR Code" class="qr-img">
             </div>
-        <script src="fortune.js"></script>
-        <script src="test.js"></script>      
+            -->
+   
         <div class="spinner-container">
             <div id="spinner" class="spinner"></div>
             <div class="zalo-button">
@@ -543,7 +581,10 @@
             </div>
           </div>  
         <footer>
-            <p>&copy; 2025. Tất cả các quyền được bảo lưu.</p>
-        </footer>
+            <p>CHÚC MỪNG NĂM MỚI 2025</p>
+            <p>&copy; 2025. Nội dung này thuộc về Nguyễn Xuân Hải. <br>Tất cả các quyền được bảo lưu.</p>        
+        </footer>        
+    <script src="fortune.js"></script>
+    <script src="test.js"></script>   
 </body>
 </html>

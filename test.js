@@ -29,5 +29,33 @@ var design = anime({
     direction: 'alternate',
     loop: true
   });
-  
+// Hàm để mở tab và hiển thị nội dung của tab đã chọn
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+
+  // Ẩn tất cả các tab trước khi mở tab mới
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Bỏ lớp 'active' cho tất cả các tab
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Hiển thị nội dung của tab đã chọn
+  document.getElementById(tabName).style.display = "block";
+
+  // Thêm lớp 'active' cho tab đã chọn
+  evt.currentTarget.className += " active";
+  document.getElementById(tabName).scrollIntoView({ behavior: 'smooth' });
+
+}
+
+// Mở tab mặc định là BIDV khi trang tải
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementsByClassName("tablinks")[0].click();
+});
   
