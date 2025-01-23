@@ -1,7 +1,7 @@
 // Câu hỏi và đáp án (30 câu hỏi)
 const allQuestions = [
     { hint: "Câu chúc đặc trưng", answer: "Chúc mừng năm mới" },
-    { hint: "Một loài hoa đặc trưng trong dịp Tết", answer: "Mai vàng" },
+    { hint: "Một loài hoa đặc trưng trong dịp Tết", answer: "Mai vàng"},
     { hint: "Một món quà Tết", answer: "Lì xì" },
     { hint: "Một loại bánh truyền thống", answer: "Bánh chưng" },
     { hint: "Một lời chúc dành cho người lớn tuổi", answer: "An khang thịnh vượng" },
