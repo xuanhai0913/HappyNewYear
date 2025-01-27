@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhận Lời Chúc Tết</title>
+    <link rel="stylesheet" href="css/doclc.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Chúc Mừng Năm Mới 2025</h1>
+        <br></br>  
+        <label for="role">Chọn vai trò của bạn:</label>
+        <select id="role">
+            <option value="ông bà nội">Ông bà nội</option>
+            <option value="bác hai">Bác Hai</option>
+            <option value="cô ba">Cô Ba</option>
+            <option value="cô năm">Cô Năm</option>
+            <option value="hai chị">2 Chị</option>
+            <option value="ba mẹ">Ba Mẹ</option>
+        </select>
+    </br>
+        <button id="wishBtn">Nhận Lời Chúc</button>
+        <div id="popup" class="popup hidden">
+            <img src="img/phongbi.png" alt="Phong bì đỏ" class="red-envelope">
+            <p id="popup-message"></p>
+            <img id="role-image" src="" alt="Hình ảnh vai trò" class="role-image">
+            <br>
+            <button id="closePopup">Đóng</button>
+        </div>
+        <div id="overlay" class="overlay hidden"></div>
+    </div>
+
+    <script src="js/doclc1.js"></script>
+</body>
+</html>
