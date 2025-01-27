@@ -811,7 +811,7 @@ table tr:hover {
         width: 210px;
         height: 250px;
         padding: 0.5rem;
-        background-image: url('img/bgr.webp');  /* Đường dẫn tới ảnh */
+        background-image: url('../img/bgr.webp');  /* Đường dẫn tới ảnh */
         background-size: cover;      /* Đảm bảo ảnh phủ đầy toàn bộ màn hình */
         background-position: center; /* Căn giữa ảnh */
         background-repeat: no-repeat; /* Không lặp lại ảnh */        border-radius: 8px;
@@ -868,6 +868,10 @@ table tr:hover {
         margin: 1.3rem;
         color: rgb(218, 244, 237);
         text-shadow: -10px 5px 10px rgba(0, 0, 0, 0.573);
+      }
+      div1{
+        color: #EFC87E;
+        font-size: 250%;
       }
       
       
