@@ -20,8 +20,8 @@ const wishes = {
         image: "../img/img_noi/hai_chi.png"
     },
     "ba mẹ": {
-        message: "Chúc Ba Mẹ năm mới bình an, sức khỏe dồi dào, và mãi là chỗ dựa vững chắc cho con cháu!",
-        image: "../img/img_noi/ba_me.png"
+        message: "Chúc Ba Mẹ năm mới bình an, sức khỏe dồi dào, và mãi là chỗ dựa vững chắc cho con cháu! Và đặc biệt là năm nay có mừng tuổi nha.",
+        image: "../img/img_noi/bame.jpg"
     }
 };
 

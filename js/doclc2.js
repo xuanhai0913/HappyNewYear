@@ -1,18 +1,18 @@
 const wishes = {
     "bà nội": {
-        message: "Chúc Bà Nội luôn mạnh khỏe, an toàn trên mọi hành trình, và sống lâu vui vầy bên con cháu!",
-        image: "../img/img_noi/ba_noi.png"
+        message: "Chúc Bà Ngoại luôn mạnh khỏe, an toàn trên mọi hành trình, và sống lâu vui vầy bên con cháu!",
+        image: "../img/img_ngoai/bangoai.jpeg"
     },
     "cậu 5": {
-        message: "Chúc Cậu 5 làm ăn phát đạt, công việc thuận buồm xuôi gió, và sức khỏe dồi dào để vươn xa hơn nữa!",
+        message: "Chúc Cậu,Mợ năm làm ăn phát đạt, công việc thuận buồm xuôi gió, và sức khỏe dồi dào để vươn xa hơn nữa!",
         image: "../img/img_noi/cau_5.png"
     },
     "gì 3": {
-        message: "Chúc Gì 3 luôn khỏe mạnh, công việc ở phường thuận lợi, và tràn đầy niềm vui trong năm mới!",
+        message: "Chúc Dượng ba, dì ba luôn khỏe mạnh, công việc ở phường thuận lợi, và tràn đầy niềm vui trong năm mới!",
         image: "../img/img_noi/gi_3.png"
     },
     "gì 6": {
-        message: "Chúc Gì 6 bán bánh mì ngày càng đông khách, sức khỏe tốt, và một năm mới tài lộc dồi dào hơn!",
+        message: "Chúc Dượng sáu, dì sáu bán bánh mì ngày càng đông khách, sức khỏe tốt, và một năm mới tài lộc dồi dào hơn!",
         image: "../img/img_noi/gi_6.png"
     }
 };
