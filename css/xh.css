@@ -1,6 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background: url("../img/bglixi.png") center/100% no-repeat, #1c2033;;    
+
 }
 
 #puzzle-container {
@@ -78,11 +80,7 @@ p {
 #lixi-button:disabled {
     background-color: gray;
 }
-body{
-    background:#000;
-    margin:0;
-    padding:0
-  }
+
   /* From Uiverse.io by elijahgummer */ 
 .golden-button {
     touch-action: manipulation;
@@ -130,4 +128,25 @@ body{
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(110, 80, 20, 0.4),
       inset 0 -2px 5px 1px #b17d10, inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
   }
-  
+  h1 {
+    font-family: 'Georgia', serif; /* Phông chữ đặc biệt */
+    font-size: 4em; /* Kích thước chữ lớn */
+    color: #ff6347; /* Màu sắc nổi bật (Tomato) */
+    text-align: center; /* Căn giữa nội dung */
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Hiệu ứng gradient */
+    -webkit-background-clip: text; /* Chỉ hiển thị gradient trên chữ */
+    -webkit-text-fill-color: transparent; /* Làm cho phần nền không hiển thị */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Hiệu ứng bóng chữ */
+    margin: 20px 0; /* Khoảng cách bên ngoài */
+    padding: 10px; /* Khoảng cách bên trong */
+}
+h2 {
+        font-family: 'Georgia', serif; /* Phông chữ đặc biệt */
+        font-size: 2em; /* Kích thước chữ lớn */
+        color: #ff6347; /* Màu sắc nổi bật (Tomato) */
+        text-align: center; /* Căn giữa nội dung */
+        background: linear-gradient(to right, #ff7e5f, #feb47b); /* Hiệu ứng gradient */
+        -webkit-background-clip: text; /* Chỉ hiển thị gradient trên chữ */
+        -webkit-text-fill-color: transparent; /* Làm cho phần nền không hiển thị */
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Hiệu ứng bóng chữ */
+    }

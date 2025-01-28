@@ -29,7 +29,7 @@ function openLixi(button) {
 
     setTimeout(() => {
         window.location.href = 'index.html';
-    }, 2000); // Chuyển hướng sau 2 giây
+    }, 4000); // Chuyển hướng sau 4 giây
 }
 
 function showPopup(message) {

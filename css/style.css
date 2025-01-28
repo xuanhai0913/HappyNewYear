@@ -802,11 +802,67 @@ table tr:hover {
         cursor: pointer;  /* Thay đổi con trỏ thành tay khi hover */
       }
       .container1 {
+        background: url("../img/bglixi.png") center/100% no-repeat, #1c2033;;    
         display: flex;
         justify-content: center;  /* Căn giữa theo chiều ngang */
         align-items: center;      /* Căn giữa theo chiều dọc */
-        height: 100vh;            /* Đặt chiều cao của container là 100% chiều cao màn hình */
+        height: 80vh;            /* Đặt chiều cao của container là 100% chiều cao màn hình */
     }
+    .container2 {
+        background: url("../img/tien.png") center/70% no-repeat, #1c203300;
+        display: flex; /* Sử dụng Flexbox để căn giữa nội dung */
+        flex-direction: column; /* Đặt nội dung theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        text-align: center; /* Căn giữa văn bản */
+        height: 20vh; /* Chiều cao của container là toàn bộ màn hình */
+        padding: 20px; /* Thêm khoảng cách nội dung */
+        box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước tổng */
+      }
+      /* Responsive Design */
+      @media screen and (max-width: 1824px){
+        .container1{
+                height: 180vh;
+        }
+      }
+      @media screen and (max-width: 1424px){
+        .container1{
+                height: 150vh;
+        }
+      }
+
+@media screen and (max-width: 1024px){
+        .container1{
+                height: 120vh;
+        }
+      }
+@media screen and (max-width: 768px) {
+        .container1{
+                height: 80vh;
+        }
+        .container2 {
+          padding: 10px; /* Giảm padding trên màn hình nhỏ */
+        }
+      
+        .container2 h2 {
+          font-size: 1.8rem; /* Giảm kích thước chữ trên tablet và điện thoại */
+        }
+      
+        #countdown {
+          font-size: 1.2rem; /* Giảm kích thước chữ đếm ngược */
+        }
+      }
+      
+      @media screen and (max-width: 480px) {
+        .container2 h2 {
+          font-size: 1.5rem; /* Nhỏ hơn trên màn hình rất nhỏ */
+        }
+      
+        #countdown {
+          font-size: 1rem; /* Nhỏ hơn trên màn hình rất nhỏ */
+          padding: 8px 15px; /* Giảm padding cho vừa màn hình */
+        }
+      }
       .card { 
         width: 210px;
         height: 250px;

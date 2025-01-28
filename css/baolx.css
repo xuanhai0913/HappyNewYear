@@ -1,0 +1,103 @@
+/* Popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url("../img/tien.png") center/70% no-repeat, #b1981b;;    
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    z-index: 20; /* Đảm bảo popup nằm trên overlay */
+    pointer-events: auto; /* Bật tương tác cho popup */
+}
+.popup p {
+    font-size: 1.3rem;
+    margin: 20px 0;
+    color: #ff7b00;
+}
+#popup, #overlay {
+    display: none;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../../img/game.jpg');
+    background-size: cover; /* Đảm bảo ảnh phủ hết trang */
+    background-position: center; /* Đặt ảnh ở trung tâm */
+    background-repeat: no-repeat; 
+    color: #d32f2f;
+    text-align: center;
+    padding: 20px;
+}
+        h1 {
+            color: #d32f2f;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+        .lixi {
+            background-image: linear-gradient(to bottom, #ff4d4d, #ffa64d);
+            color: white;
+            border: 2px solid #e69900;
+            border-radius: 5px;
+            padding: 20px 30px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        .lixi:hover {
+            transform: scale(1.1);
+        }
+        .lixi.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .btn-index {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Làm tối màn hình */
+    z-index: 10; /* Lớp phủ phía dưới popup */
+    pointer-events: none; /* Không chặn tương tác của các phần tử bên trên */
+}
+.overlay.hidden {
+    display: none;
+}
+.popup img.role-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+}

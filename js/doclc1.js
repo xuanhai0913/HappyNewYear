@@ -40,10 +40,19 @@ document.getElementById("wishBtn").addEventListener("click", () => {
         popup.classList.remove("hidden");
         overlay.classList.remove("hidden");
 
-        // Phát âm thanh lời chúc
+        // Phát âm thanh lời chúc với giọng nam ấm
         const speech = new SpeechSynthesisUtterance(wish.message);
         speech.lang = "vi-VN";
         speech.rate = 1.1;
+
+        // Chọn giọng nam
+        const voices = window.speechSynthesis.getVoices();
+        const maleVoice = voices.find(voice => voice.lang === "vi-VN" && voice.name.includes("Nam"));
+
+        if (maleVoice) {
+            speech.voice = maleVoice;
+        }
+
         window.speechSynthesis.speak(speech);
     }
 });

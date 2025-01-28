@@ -25,7 +25,7 @@ function giveLuckyMoney() {
     fireworks.style.display = "none"; // Ẩn phần tử pháo hoa nếu cần
 }
     //<![CDATA[
-        var pictureSrc = "https://img.lovepik.com/element/40054/0068.png_860.png"; //Link ảnh hoa muốn hiển thị trên web
+        var pictureSrc = "../img/coin.png"; //Link ảnh hoa muốn hiển thị trên web
         var pictureWidth = 35; //Chiều rộng của hoa mai or đào
         var pictureHeight = 35; //Chiều cao của hoa mai or đào
         var numFlakes = 20; //Số bông hoa xuất hiện cùng một lúc trên trang web

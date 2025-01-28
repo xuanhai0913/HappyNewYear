@@ -10,7 +10,16 @@
     <div class="game-container">
         <h1>Trò chơi "Đoán chữ Tết"</h1>
         <p id="hint">Gợi ý: </p>
-        <input type="text" id="answer" placeholder="Nhập câu trả lời của bạn">
+        <div class="input-container">
+            <input
+            class="input"
+            name="text"
+            type="text"
+            id="answer"
+            placeholder="Nhập câu trả lời ở đây..."
+          />
+        </div>
+        <br>
         <button onclick="checkAnswer()">Trả lời</button>
         <div id="result" class="hidden">
             <p id="result-message"></p>

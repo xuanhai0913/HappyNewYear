@@ -1,19 +1,19 @@
 const wishes = {
-    "bạn bè": {
-        message: "Chúc bạn bè một năm mới tràn ngập niềm vui, sức khỏe dồi dào, và đạt được mọi mục tiêu trong cuộc sống!",
-        image: "friend.png"
+    "bà nội": {
+        message: "Chúc Bà Nội luôn mạnh khỏe, an toàn trên mọi hành trình, và sống lâu vui vầy bên con cháu!",
+        image: "../img/img_noi/ba_noi.png"
     },
-    "đồng nghiệp": {
-        message: "Chúc bạn một năm mới sự nghiệp thăng hoa, công việc thuận lợi, và thành công nối tiếp thành công!",
-        image: "colleague.png"
+    "cậu 5": {
+        message: "Chúc Cậu 5 làm ăn phát đạt, công việc thuận buồm xuôi gió, và sức khỏe dồi dào để vươn xa hơn nữa!",
+        image: "../img/img_noi/cau_5.png"
     },
-    "gia đình": {
-        message: "Chúc gia đình bạn một năm tràn đầy yêu thương, đoàn viên, hạnh phúc và sức khỏe dồi dào!",
-        image: "family.png"
+    "gì 3": {
+        message: "Chúc Gì 3 luôn khỏe mạnh, công việc ở phường thuận lợi, và tràn đầy niềm vui trong năm mới!",
+        image: "../img/img_noi/gi_3.png"
     },
-    "người yêu": {
-        message: "Chúc bạn và người yêu một năm mới ngập tràn hạnh phúc, tình yêu thăng hoa, và luôn đồng hành cùng nhau!",
-        image: "lover.png"
+    "gì 6": {
+        message: "Chúc Gì 6 bán bánh mì ngày càng đông khách, sức khỏe tốt, và một năm mới tài lộc dồi dào hơn!",
+        image: "../img/img_noi/gi_6.png"
     }
 };
 
