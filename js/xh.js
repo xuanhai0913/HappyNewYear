@@ -6,7 +6,7 @@ function giveLuckyMoney() {
 
 
     // Tạo số tiền ngẫu nhiên từ 1,000 đến 50,000 và đảm bảo là số chẵn
-    let money = Math.floor(Math.random() * 25) * 2000 + 1000;
+    let money = Math.floor(Math.random() * 25) * 20 + 1000;
 
     // Định dạng số tiền với dấu phẩy
     let formattedMoney = money.toLocaleString() + 'đ';

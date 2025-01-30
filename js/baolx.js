@@ -1,4 +1,4 @@
-const prizes = ['10,000đ', '20,000đ', '50,000đ', 'Cái nịt', '30,000đ', '50,000đ', '40,000đ', '30,000đ', '50,000đ', '60,000đ'];
+const prizes = ['Cái nịt', 'Cái nịt', 'Cái nịt', 'Cái nịt', 'Cái nịt', 'Cái nịt', 'Cái nịt', 'Cái nịt', 'Cái nịt', 'Cái nịt'];
 const shuffledPrizes = [...prizes].sort(() => Math.random() - 0.5); // Xáo trộn phần thưởng
 let remainingPrizes = [...shuffledPrizes];
 let hasClicked = false; // Biến kiểm tra đã bấm hay chưa
