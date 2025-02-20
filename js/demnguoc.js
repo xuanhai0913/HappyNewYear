@@ -1,6 +1,6 @@
  // Đếm ngược
  const countdownElement = document.getElementById('countdown');
- const newYearDate = new Date("2025-01-29T00:00:00").getTime();
+ const newYearDate = new Date("2026-02-17T00:00:00").getTime();
 
  const interval = setInterval(function() {
    const now = new Date().getTime();
@@ -15,6 +15,6 @@
 
    if (timeLeft < 0) {
      clearInterval(interval);
-     countdownElement.innerHTML = "Chúc mừng năm mới Ất Tỵ 2025!";
+     countdownElement.innerHTML = "Chúc mừng năm mới Bính Ngọ 2026!";
    }
  }, 1000);
