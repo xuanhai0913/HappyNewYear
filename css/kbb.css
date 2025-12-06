@@ -4,17 +4,65 @@
 
 /* CSS Variables */
 :root {
-    --primary-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffcc00 100%);
-    --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --primary-gradient: linear-gradient(135deg, #FFD700 0%, #FF8C00 50%, #FF0000 100%);
+    /* Gold to Red */
+    --secondary-gradient: linear-gradient(135deg, #1c2033 0%, #2a2f4c 100%);
     --win-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
     --lose-gradient: linear-gradient(135deg, #eb5757 0%, #ff6b6b 100%);
     --tie-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     --glass-bg: rgba(255, 255, 255, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
     --text-primary: #ffffff;
+    --text-gold: #FFD700;
     --text-secondary: #EFC87E;
     --bg-dark: #1c2033;
     --shadow-glow: 0 0 30px rgba(239, 200, 126, 0.3);
+}
+
+/* Happy New Year Banner */
+.hny-banner {
+    text-align: center;
+    margin: 10px 0 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.fire-text {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #ff00de,
+        0 0 30px #ff00de,
+        0 0 40px #ff00de,
+        0 0 50px #ff00de,
+        0 0 75px #ff00de;
+    animation: neon-pulse 1.5s infinite alternate;
+    font-family: 'Segoe UI', sans-serif;
+    /* Or a more decorative font if available */
+}
+
+@keyframes neon-pulse {
+    from {
+        text-shadow:
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 20px #FFD700,
+            0 0 30px #FFD700,
+            0 0 40px #FFD700;
+    }
+
+    to {
+        text-shadow:
+            0 0 2px #fff,
+            0 0 5px #fff,
+            0 0 10px #FFD700,
+            0 0 20px #FFD700,
+            0 0 30px #FF8C00;
+    }
 }
 
 /* Game Container */
@@ -634,6 +682,48 @@ footer p:first-child {
     50% {
         transform: scale(1.2);
     }
+}
+
+
+/* Mouse Trail */
+#mouse-trail-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.trail-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    background: white;
+    box-shadow: 0 0 10px white;
+}
+
+/* Background Particles (Falling Flowers) */
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    top: -20px;
+    background: radial-gradient(circle, #FFD700 0%, #FFA500 100%);
+    border-radius: 50% 0 50% 50%;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
 }
 
 /* Responsive Design */

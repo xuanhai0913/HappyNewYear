@@ -25,12 +25,10 @@ const playerScoreEl = document.getElementById('player-score');
 const computerScoreEl = document.getElementById('computer-score');
 const tieScoreEl = document.getElementById('tie-score');
 const resultContainer = document.getElementById('result-container');
-const resultTextEl = document.getElementById('result-text');
-const resetBtn = document.getElementById('reset-btn');
-const confettiContainer = document.getElementById('confetti-container');
-
-// Choice buttons
-const choiceBtns = document.querySelectorAll('.choice-btn');
+// Game Control Elements
+const musicBtn = document.getElementById('music-btn');
+const bgMusic = document.getElementById('bg-music');
+let isMusicPlaying = true;
 
 // Initialize game
 function init() {
@@ -42,8 +40,40 @@ function init() {
     // Reset button
     resetBtn.addEventListener('click', resetGame);
 
+    // Music toggle
+    musicBtn.addEventListener('click', toggleMusic);
+
     // Load saved scores from localStorage
     loadScores();
+
+    // Start background fireworks
+    startBackgroundFireworks();
+
+    // Attempt to play music (might be blocked by browser policy)
+    bgMusic.volume = 0.5;
+    bgMusic.play().catch(() => {
+        isMusicPlaying = false;
+        updateMusicIcon();
+    });
+}
+
+function toggleMusic() {
+    if (isMusicPlaying) {
+        bgMusic.pause();
+    } else {
+        bgMusic.play();
+    }
+    isMusicPlaying = !isMusicPlaying;
+    updateMusicIcon();
+}
+
+function updateMusicIcon() {
+    const icon = musicBtn.querySelector('i');
+    if (isMusicPlaying) {
+        icon.className = 'fas fa-volume-up';
+    } else {
+        icon.className = 'fas fa-volume-mute';
+    }
 }
 
 // Load scores from localStorage
@@ -99,9 +129,9 @@ function handleChoice(playerChoice) {
         choiceBtns.forEach(btn => btn.disabled = false);
         gameState.isPlaying = false;
 
-        // Show confetti on win
+        // Show large fireworks on win
         if (result === 'win') {
-            createConfetti();
+            triggerWinFireworks();
         }
 
     }, 1000);
@@ -214,7 +244,7 @@ function updateScoreDisplay() {
 // Animate score
 function animateScore(element) {
     element.style.transform = 'scale(1.5)';
-    element.style.color = '#ffcc00';
+    element.style.color = '#FFD700';
 
     setTimeout(() => {
         element.style.transform = 'scale(1)';
@@ -246,28 +276,58 @@ function resetGame() {
     }, 500);
 }
 
-// Create confetti effect
-function createConfetti() {
-    const colors = ['#ff6b35', '#f7931e', '#ffcc00', '#38ef7d', '#667eea', '#f5576c'];
+// Background Fireworks Loop
+function startBackgroundFireworks() {
+    if (typeof confetti === 'undefined') return;
 
-    for (let i = 0; i < 50; i++) {
-        setTimeout(() => {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.width = Math.random() * 10 + 5 + 'px';
-            confetti.style.height = Math.random() * 10 + 5 + 'px';
-            confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+    const duration = 15 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-            confettiContainer.appendChild(confetti);
-
-            // Remove after animation
-            setTimeout(() => {
-                confetti.remove();
-            }, 4000);
-        }, i * 50);
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
     }
+
+    const interval = setInterval(function () {
+        const timeLeft = animationEnd - Date.now();
+
+        // Occasional bursts
+        if (Math.random() < 0.1) {
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { x: Math.random(), y: Math.random() - 0.2 },
+                colors: ['#FFD700', '#FF0000', '#FFFFFF']
+            });
+        }
+
+    }, 2000);
+}
+
+// Big Fireworks on Win
+function triggerWinFireworks() {
+    if (typeof confetti === 'undefined') return;
+
+    var duration = 3 * 1000;
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+    var interval = setInterval(function () {
+        var timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+            return clearInterval(interval);
+        }
+
+        var particleCount = 50 * (timeLeft / duration);
+        // since particles fall down, start a bit higher than random
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+    }, 250);
+}
+
+function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
 }
 
 // Add keyboard support

@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Primary Meta Tags -->
     <title>Kéo Búa Bao 🎮 | Happy New Year 2026</title>
     <meta name="title" content="Kéo Búa Bao 🎮 | Happy New Year 2026">
     <meta name="description" content="Chơi Kéo Búa Bao - Thắng để nhận thêm lượt rút lì xì! Trò chơi Tết vui nhộn.">
     <meta name="keywords" content="Kéo Búa Bao, Rock Paper Scissors, Trò chơi Tết, Happy New Year 2026">
     <meta name="author" content="Nguyen Xuan Hai">
-    
+
     <!-- Theme Color -->
     <meta name="theme-color" content="#1c2033">
-    
+
     <!-- Favicon -->
-    <link rel="icon" href="https://res.cloudinary.com/dqdcqtu8m/image/upload/v1765003310/favicon_hwohfv.png" type="image/png">
-    
+    <link rel="icon" href="https://res.cloudinary.com/dqdcqtu8m/image/upload/v1765003310/favicon_hwohfv.png"
+        type="image/png">
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/kbb.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <!-- Confetti Container -->
     <div id="confetti-container"></div>
-    
+
+    <!-- Audio -->
+    <audio id="bg-music" autoplay loop>
+        <source src="img/bg.mp3" type="audio/mpeg">
+    </audio>
+
     <header>
         <a href="index.html">
-            <img src="https://res.cloudinary.com/dqdcqtu8m/image/upload/v1765001214/Logo_st3nmr.png" alt="Logo" class="logo">
+            <img src="https://res.cloudinary.com/dqdcqtu8m/image/upload/v1765001214/Logo_st3nmr.png" alt="Logo"
+                class="logo">
         </a>
+        <div class="hny-banner">
+            <span class="fire-text">Happy New Year 2026</span>
+        </div>
         <nav class="game-nav">
             <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Trang chủ</a>
             <a href="xh.html" class="nav-link"><i class="fas fa-gift"></i> Lì xì</a>
@@ -74,11 +86,11 @@
                 </div>
                 <div class="side-label">Bạn chọn</div>
             </div>
-            
+
             <div class="vs-container">
                 <span class="vs-text">VS</span>
             </div>
-            
+
             <div class="computer-side">
                 <div class="choice-display computer-choice" id="computer-choice">
                     <span class="choice-emoji">❓</span>
@@ -116,6 +128,9 @@
             <button class="control-btn reset-btn" id="reset-btn">
                 <i class="fas fa-redo"></i> Chơi lại
             </button>
+            <button class="control-btn music-btn" id="music-btn">
+                <i class="fas fa-volume-up"></i>
+            </button>
         </div>
 
         <!-- Game Rules -->
@@ -128,6 +143,10 @@
             </ul>
         </div>
     </main>
+
+    <!-- Background Effects Container -->
+    <div id="particles-container"></div>
+    <div id="mouse-trail-container"></div>
 
     <!-- Zalo Button -->
     <div class="spinner-container">
@@ -142,9 +161,17 @@
     <footer>
         <p>CHÚC MỪNG NĂM MỚI 2025</p>
         <p>&copy; Copyright 2025 by Nxhai
-            <br>Tất cả các quyền được bảo lưu.</p>
+            <br>Tất cả các quyền được bảo lưu.
+        </p>
     </footer>
 
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <!-- Game Scripts -->
     <script src="js/kbb.js"></script>
+    <script src="js/kbb-effects.js"></script>
 </body>
+
 </html>
