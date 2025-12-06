@@ -1,12 +1,19 @@
 // API để quản lý lì xì với database
 // Lưu trữ lịch sử nhận lì xì, top người may mắn
 
-import Redis from 'ioredis';
+const Redis = require('ioredis');
 
 // Tạo Redis client
-const redis = new Redis(process.env.REDIS_URL);
+let redis;
+function getRedis() {
+  if (!redis) {
+    redis = new Redis(process.env.REDIS_URL);
+  }
+  return redis;
+}
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
+  const redis = getRedis();
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -92,4 +99,4 @@ export default async function handler(req, res) {
       message: error.message 
     });
   }
-}
+};

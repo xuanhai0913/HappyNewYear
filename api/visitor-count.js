@@ -1,12 +1,19 @@
 // API để đếm số người truy cập
 // Sử dụng Redis để lưu trữ
 
-import Redis from 'ioredis';
+const Redis = require('ioredis');
 
 // Tạo Redis client
-const redis = new Redis(process.env.REDIS_URL);
+let redis;
+function getRedis() {
+  if (!redis) {
+    redis = new Redis(process.env.REDIS_URL);
+  }
+  return redis;
+}
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
+  const redis = getRedis();
   // Cho phép CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
@@ -52,4 +59,4 @@ export default async function handler(req, res) {
       message: error.message 
     });
   }
-}
+};
