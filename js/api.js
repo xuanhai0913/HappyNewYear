@@ -98,9 +98,8 @@ export async function updateVisitorDisplay() {
   const visitorElement = document.getElementById('visitor-count');
   if (visitorElement && data.success) {
     visitorElement.innerHTML = `
-      <i class="fas fa-users"></i> 
-      <span>Tổng: <strong>${formatNumber(data.total)}</strong></span> | 
-      <span>Hôm nay: <strong>${formatNumber(data.today)}</strong></span>
+      <i class="fas fa-eye"></i> 
+      <span>Lượt xem: <strong>${formatNumber(data.total)}</strong></span>
     `;
   }
 }
