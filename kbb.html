@@ -27,47 +27,17 @@
         <p>Số điểm của BOT: <span id="computer-score">0</span></p>
       </div>
   
-      <div class="buttons">
-        <!-- From Uiverse.io by gagan-gv --> 
-          <button class="btn cube cube-hover" id="Búa" type="button">
-            <div class="bg-top">
-              <div class="bg-inner"></div>
-            </div>
-            <div class="bg-right">
-              <div class="bg-inner"></div>
-            </div>
-            <div class="bg">
-              <div class="bg-inner"></div>
-            </div>
-            <div class="text">Búa</div>
-          </button>
-          <!-- From Uiverse.io by gagan-gv --> 
-          <button class="btn cube cube-hover" id="Bao" type="button">
-            <div class="bg-top">
-              <div class="bg-inner"></div>
-            </div>
-            <div class="bg-right">
-              <div class="bg-inner"></div>
-            </div>
-            <div class="bg">
-              <div class="bg-inner"></div>
-            </div>
-            <div class="text">Bao</div>
-          </button>
-          <!-- From Uiverse.io by gagan-gv --> 
-          <button class="btn cube cube-hover" id="Kéo" type="button">
-            <div class="bg-top">
-              <div class="bg-inner"></div>
-            </div>
-            <div class="bg-right">
-              <div class="bg-inner"></div>
-            </div>
-            <div class="bg">
-              <div class="bg-inner"></div>
-            </div>
-            <div class="text">Kéo</div>
-          </button>
+      <div id="game-canvas-container"></div>
 
+      <div id="choices" class="choices">
+        <div class="choice">
+          <h3>Bạn</h3>
+          <div id="player-choice"></div>
+        </div>
+        <div class="choice">
+          <h3>BOT</h3>
+          <div id="computer-choice"></div>
+        </div>
       </div>
 
       <div id="result"></div>
@@ -75,6 +45,9 @@
       <div id="lixi-message"></div>
     </div>
     
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
   <script src="js/kbb.js"></script>
+  <script src="js/kbb-3d.js"></script>
 </body>
 </html>

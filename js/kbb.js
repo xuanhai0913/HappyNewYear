@@ -5,9 +5,10 @@ const playerScore = document.getElementById("player-score");
 const computerScore = document.getElementById("computer-score");
 const resultText = document.getElementById("result");
 const lixiMessage = document.getElementById("lixi-message");
-const winGif = document.getElementById("win-gif");
-const loseGif = document.getElementById("lose-gif");
-const drawGif = document.getElementById("draw-gif");
+const playerChoiceDiv = document.getElementById("player-choice");
+const computerChoiceDiv = document.getElementById("computer-choice");
+const gameButtons = document.querySelectorAll(".cube");
+
 
 // Game logic
 let playerScoreCount = 0;
@@ -15,6 +16,11 @@ let computerScoreCount = 0;
 let isGameActive = true;
 
 const choices = ["Búa", "Bao", "Kéo"];
+const choiceEmojis = {
+  "Búa": "✊",
+  "Bao": "✋",
+  "Kéo": "✌️"
+};
 
 // Check ban status on load
 window.addEventListener('DOMContentLoaded', async function() {
@@ -33,16 +39,6 @@ async function checkBanStatus() {
         }
     } catch (error) {
         console.error('Error checking ban status:', error);
-    }
-}
-
-function disableGame(message) {
-    isGameActive = false;
-    document.getElementById("Búa").disabled = true;
-    document.getElementById("Bao").disabled = true;
-    document.getElementById("Kéo").disabled = true;
-    if (message) {
-        resultText.textContent = message;
     }
 }
 
@@ -85,7 +81,6 @@ async function handleWin() {
     
     const data = await response.json();
     if (data.success) {
-      winGif.classList.remove("hidden");
       lixiMessage.textContent = `🎉 ${data.message}`;
       lixiMessage.style.color = "green";
       
@@ -96,7 +91,7 @@ async function handleWin() {
     console.error('Error handling win:', error);
   }
   
-  disableGame();
+  isGameActive = false;
 }
 
 function showVictoryPopup(totalTurns) {
@@ -221,7 +216,6 @@ async function handleLoss() {
     
     const data = await response.json();
     if (data.success) {
-      loseGif.classList.remove("hidden");
       lixiMessage.textContent = `❌ ${data.message}`;
       lixiMessage.style.color = "red";
       
@@ -232,7 +226,7 @@ async function handleLoss() {
     console.error('Error handling loss:', error);
   }
   
-  disableGame();
+  isGameActive = false;
 }
 
 function showLossPopup(minutes) {
@@ -324,35 +318,20 @@ function updateScores() {
   computerScore.textContent = computerScoreCount;
 }
 
+async function handleGameLogic(playerSelection, computerSelection) {
+    if (!isGameActive) return;
 
+    // Display choices
+    playerChoiceDiv.textContent = choiceEmojis[playerSelection];
+    computerChoiceDiv.textContent = choiceEmojis[computerSelection];
 
-// Handle player's choice
-document.getElementById("Búa").addEventListener("click", async function () {
-  if (!isGameActive) return;
-  
-  const playerSelection = "Búa";
-  const computerSelection = computerChoice();
-  const result = await playRound(playerSelection, computerSelection);
-  resultText.textContent = `${result} (Máy tính chọn ${computerSelection})`;
-  updateScores();
-});
+    const result = await playRound(playerSelection, computerSelection);
+    resultText.textContent = `${result}`;
+    updateScores();
+}
 
-document.getElementById("Bao").addEventListener("click", async function () {
-  if (!isGameActive) return;
-  
-  const playerSelection = "Bao";
-  const computerSelection = computerChoice();
-  const result = await playRound(playerSelection, computerSelection);
-  resultText.textContent = `${result} (Máy tính chọn ${computerSelection})`;
-  updateScores();
-});
-
-document.getElementById("Kéo").addEventListener("click", async function () {
-  if (!isGameActive) return;
-  
-  const playerSelection = "Kéo";
-  const computerSelection = computerChoice();
-  const result = await playRound(playerSelection, computerSelection);
-  resultText.textContent = `${result} (Máy tính chọn ${computerSelection})`;
-  updateScores();
-});
+async function play(playerSelection) {
+    if (!isGameActive) return;
+    const computerSelection = computerChoice();
+    await handleGameLogic(playerSelection, computerSelection);
+}
