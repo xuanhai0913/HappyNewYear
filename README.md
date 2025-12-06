@@ -14,8 +14,7 @@
 ### 🎮 Trò Chơi
 - 🧧 **Lì xì may mắn** - Nhận lì xì với số tiền ngẫu nhiên
 - ✊ **Kéo Búa Bao** - Trò chơi oẳn tù tì
-- 🎯 **Đoán chữ Tết** - Game đoán chữ về Tết
-- 🎁 **Bao lì xì may mắn** - Mở bao lì xì ngẫu nhiên
+-  **Bao lì xì may mắn** - Mở bao lì xì ngẫu nhiên
 
 ### 📊 Tính Năng Database (Mới!)
 - 👥 **Đếm người truy cập** - Thống kê lượt truy cập tổng và hôm nay
