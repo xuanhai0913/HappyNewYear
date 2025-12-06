@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Kéo Búa Bao 🎮 | Happy New Year 2026</title>
+    <meta name="title" content="Kéo Búa Bao 🎮 | Happy New Year 2026">
+    <meta name="description" content="Chơi Kéo Búa Bao - Thắng để nhận thêm lượt rút lì xì! Trò chơi Tết vui nhộn.">
+    <meta name="keywords" content="Kéo Búa Bao, Rock Paper Scissors, Trò chơi Tết, Happy New Year 2026">
+    <meta name="author" content="Nguyen Xuan Hai">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1c2033">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://res.cloudinary.com/dqdcqtu8m/image/upload/v1765003310/favicon_hwohfv.png" type="image/png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/kbb.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
+    
+    <header>
+        <a href="index.html">
+            <img src="https://res.cloudinary.com/dqdcqtu8m/image/upload/v1765001214/Logo_st3nmr.png" alt="Logo" class="logo">
+        </a>
+        <nav class="game-nav">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Trang chủ</a>
+            <a href="xh.html" class="nav-link"><i class="fas fa-gift"></i> Lì xì</a>
+        </nav>
+    </header>
+
+    <main class="game-container">
+        <!-- Game Title -->
+        <div class="game-header">
+            <h1 class="game-title">
+                <span class="emoji">✊</span>
+                Kéo Búa Bao
+                <span class="emoji">✌️</span>
+            </h1>
+            <p class="game-subtitle">Thắng để nhận thêm lượt rút lì xì! 🎁</p>
+        </div>
+
+        <!-- Score Board -->
+        <div class="scoreboard">
+            <div class="score-item player-score">
+                <div class="score-icon">👤</div>
+                <div class="score-label">Bạn</div>
+                <div class="score-value" id="player-score">0</div>
+            </div>
+            <div class="score-item tie-score">
+                <div class="score-icon">🤝</div>
+                <div class="score-label">Hòa</div>
+                <div class="score-value" id="tie-score">0</div>
+            </div>
+            <div class="score-item computer-score">
+                <div class="score-icon">🤖</div>
+                <div class="score-label">Máy</div>
+                <div class="score-value" id="computer-score">0</div>
+            </div>
+        </div>
+
+        <!-- Battle Arena -->
+        <div class="battle-arena">
+            <div class="player-side">
+                <div class="choice-display player-choice" id="player-choice">
+                    <span class="choice-emoji">❓</span>
+                </div>
+                <div class="side-label">Bạn chọn</div>
+            </div>
+            
+            <div class="vs-container">
+                <span class="vs-text">VS</span>
+            </div>
+            
+            <div class="computer-side">
+                <div class="choice-display computer-choice" id="computer-choice">
+                    <span class="choice-emoji">❓</span>
+                </div>
+                <div class="side-label">Máy chọn</div>
+            </div>
+        </div>
+
+        <!-- Result Display -->
+        <div class="result-container" id="result-container">
+            <div class="result-text" id="result-text">Hãy chọn để bắt đầu!</div>
+        </div>
+
+        <!-- Choice Buttons -->
+        <div class="choices-container">
+            <button class="choice-btn" data-choice="rock" id="btn-rock">
+                <span class="btn-emoji">✊</span>
+                <span class="btn-label">Búa</span>
+                <div class="btn-glow"></div>
+            </button>
+            <button class="choice-btn" data-choice="paper" id="btn-paper">
+                <span class="btn-emoji">🖐️</span>
+                <span class="btn-label">Bao</span>
+                <div class="btn-glow"></div>
+            </button>
+            <button class="choice-btn" data-choice="scissors" id="btn-scissors">
+                <span class="btn-emoji">✌️</span>
+                <span class="btn-label">Kéo</span>
+                <div class="btn-glow"></div>
+            </button>
+        </div>
+
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button class="control-btn reset-btn" id="reset-btn">
+                <i class="fas fa-redo"></i> Chơi lại
+            </button>
+        </div>
+
+        <!-- Game Rules -->
+        <div class="game-rules">
+            <h3><i class="fas fa-info-circle"></i> Luật chơi</h3>
+            <ul>
+                <li>✊ <strong>Búa</strong> thắng ✌️ <strong>Kéo</strong></li>
+                <li>✌️ <strong>Kéo</strong> thắng 🖐️ <strong>Bao</strong></li>
+                <li>🖐️ <strong>Bao</strong> thắng ✊ <strong>Búa</strong></li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Zalo Button -->
+    <div class="spinner-container">
+        <div id="spinner" class="spinner"></div>
+        <div class="zalo-button">
+            <a href="https://zalo.me/0929501116" target="_blank">
+                <img src="img/zalo.png" alt="Zalo" style="width: 40px; height: auto;">
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>CHÚC MỪNG NĂM MỚI 2025</p>
+        <p>&copy; Copyright 2025 by Nxhai
+            <br>Tất cả các quyền được bảo lưu.</p>
+    </footer>
+
+    <script src="js/kbb.js"></script>
+</body>
+</html>
