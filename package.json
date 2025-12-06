@@ -7,11 +7,11 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
-    "ioredis": "^5.3.2",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "ioredis": "^5.3.2"
   },
   "devDependencies": {
-    "vercel": "^33.0.0"
+    "vercel": "^49.1.1"
   },
   "keywords": [
     "happy-new-year",
