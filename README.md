@@ -5,7 +5,7 @@
 
 > Website chúc Tết với các trò chơi thú vị, tính năng lì xì may mắn và database để lưu trữ!
 
-🌐 **Live Demo:** [https://hailamdev.space](https://hailamdev.space)
+🌐 **Live Demo:** [https://happynewyear.hailamdev.space/](https://happynewyear.hailamdev.space/)
 
 ---
 
@@ -13,15 +13,23 @@
 
 ### 🎮 Trò Chơi
 - 🧧 **Lì xì may mắn** - Nhận lì xì với số tiền ngẫu nhiên
-- ✊ **Kéo Búa Bao** - Trò chơi oẳn tù tì
--  **Bao lì xì may mắn** - Mở bao lì xì ngẫu nhiên
+  - 🔒 Giới hạn **1 lượt/ngày** (theo IP)
+  - 🎁 Nhận lượt thêm từ game Kéo Búa Bao
+  
+- ✊ **Kéo Búa Bao** - Trò chơi oẳn tù tì với phần thưởng và hình phạt
+  - ✅ **Thắng** → +1 lượt rút lì xì (tự động chuyển trang)
+  - ❌ **Thua** → Bị cấm chơi 15 phút
+  - 🤝 **Hòa** → Tiếp tục chơi
 
-### 📊 Tính Năng Database (Mới!)
-- 👥 **Đếm người truy cập** - Thống kê lượt truy cập tổng và hôm nay
+### 📊 Tính Năng Database
+- 👥 **Đếm người truy cập** - Thống kê lượt truy cập website
 - 🏆 **Bảng xếp hạng** - Top 10 người may mắn nhất
 - 📈 **Thống kê real-time** - Tổng lì xì, tổng tiền, số người chơi
 - 💾 **Lưu lịch sử** - Tất cả lượt nhận lì xì được lưu trữ
 - 🎯 **Xếp hạng cá nhân** - Xem vị trí của bạn sau khi nhận lì xì
+- 🎮 **Quản lý lượt chơi** - Giới hạn theo IP, theo ngày
+- ⏰ **Hệ thống ban** - Tự động khóa/mở khóa người chơi
+- 🔑 **Admin Panel** - Quản lý visitor count, lixi amounts, users
 
 ---
 
@@ -241,7 +249,7 @@ node test-api.js
 
 **Nguyen Xuan Hai**
 
-- 🌐 Website: [nxhai0913.vercel.app](https://nxhai0913.vercel.app/)
+- 🌐 Website: [https://hailamdev.space/](https://hailamdev.space/)
 - 💬 Zalo: 0929501116
 - 📧 Email: [Thêm email của bạn]
 

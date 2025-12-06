@@ -122,6 +122,34 @@ async function giveLuckyMoney() {
         return;
     }
     
+    // Check if player can play
+    try {
+        const checkResponse = await fetch(`${API_BASE_URL}/api/game-turns?action=checkLixiTurns`);
+        const checkData = await checkResponse.json();
+        
+        if (!checkData.canPlay) {
+            alert(checkData.message);
+            return;
+        }
+        
+        // Use the turn
+        const useResponse = await fetch(`${API_BASE_URL}/api/game-turns`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'useLixiTurn' })
+        });
+        
+        const useData = await useResponse.json();
+        if (!useData.success) {
+            alert(useData.message || 'Đã hết lượt chơi!');
+            return;
+        }
+    } catch (error) {
+        console.error('Error checking turns:', error);
+        alert('Có lỗi xảy ra! Vui lòng thử lại.');
+        return;
+    }
+    
     // Hiển thị hiệu ứng pháo hoa
     const fireworks = document.getElementById("fireworks");
     const lixiButton = document.getElementById("lixi-button");
@@ -163,10 +191,32 @@ async function giveLuckyMoney() {
     }
 }
 
+// Check turns on page load
+async function checkTurnsOnLoad() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/game-turns?action=checkLixiTurns`);
+        const data = await response.json();
+        
+        const lixiButton = document.getElementById("lixi-button");
+        const amountText = document.getElementById("lixi-amount");
+        
+        if (!data.canPlay) {
+            lixiButton.disabled = true;
+            lixiButton.innerHTML = '<span class="golden-text">Đã hết lượt</span>';
+            amountText.innerHTML = `<p style="color: #FFD700; font-size: 18px;">${data.message}</p>`;
+        } else if (data.extraTurns > 0) {
+            amountText.innerHTML = `<p style="color: #00FF00; font-size: 18px;">🎮 Bạn có ${data.turnsLeft} lượt rút lì xì (${data.extraTurns} lượt thưởng từ Kéo Búa Bao)!</p>`;
+        }
+    } catch (error) {
+        console.error('Error checking turns:', error);
+    }
+}
+
 // Load dữ liệu khi trang được tải
 window.addEventListener('DOMContentLoaded', function() {
     loadLeaderboard();
     loadStats();
+    checkTurnsOnLoad();
 });
     //<![CDATA[
         var pictureSrc = "../img/coin.png"; //Link ảnh hoa muốn hiển thị trên web
