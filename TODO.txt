@@ -1,0 +1,110 @@
+═══════════════════════════════════════════════════════════════════════
+  🎯 CHECKLIST DEPLOY - REDIS CLOUD VERSION
+═══════════════════════════════════════════════════════════════════════
+
+## ✅ CẦN LÀM NGAY
+
+□ 1. Cài lại dependencies
+   ```powershell
+   cd e:\Project\HappyNewYear
+   npm install
+   ```
+
+□ 2. Test Redis connection (Optional)
+   ```powershell
+   node test-redis.js
+   ```
+   → Phải thấy "✅ ALL TESTS PASSED!"
+
+□ 3. Thêm REDIS_URL vào Vercel
+   - Vào: https://vercel.com/dashboard
+   - Chọn project
+   - Settings → Environment Variables
+   - Add: 
+     * Key: REDIS_URL
+     * Value: redis://default:GstPI9Z1bLSXoxrHFYAMQ89YF8NnsxUJ@redis-11467.c263.us-east-1-2.ec2.cloud.redislabs.com:11467
+     * Environment: All (Production, Preview, Development)
+   - Save
+
+□ 4. Deploy lên Vercel
+   ```powershell
+   vercel --prod
+   ```
+
+□ 5. Test trên production
+   - Mở: https://hailamdev.space
+   - Check visitor counter
+   - Vào /xh.html
+   - Nhận lì xì
+   - Xem leaderboard & stats
+
+═══════════════════════════════════════════════════════════════════════
+
+## 📋 NHỮNG GÌ ĐÃ THAY ĐỔI
+
+✅ Database: Vercel KV → Redis Cloud
+✅ Package: @vercel/kv → ioredis
+✅ Files updated:
+   - api/visitor-count.js
+   - api/lixi.js
+   - package.json
+   - .env
+   - All documentation
+
+✅ Domain: hailamdev.space
+✅ Redis: Redis Cloud US East
+
+═══════════════════════════════════════════════════════════════════════
+
+## ⚡ QUICK COMMANDS
+
+# Install dependencies
+npm install
+
+# Test Redis
+node test-redis.js
+
+# Deploy
+vercel --prod
+
+# View logs
+vercel logs
+
+# Check Redis data (in browser)
+https://app.redislabs.com
+
+═══════════════════════════════════════════════════════════════════════
+
+## 🎯 EXPECTED RESULTS
+
+After deploy:
+✓ Visitor counter works (increments on new visits)
+✓ Lixi game saves to Redis
+✓ Leaderboard shows top 10
+✓ Statistics update in real-time
+✓ All data persists across deploys
+
+═══════════════════════════════════════════════════════════════════════
+
+## 🐛 IF SOMETHING BREAKS
+
+Error: "Cannot connect to Redis"
+→ Check REDIS_URL in Vercel environment variables
+
+Error: "Module not found: ioredis"
+→ Run: npm install && vercel --prod
+
+Visitor counter = 0
+→ Normal! Fresh database starts at 0
+
+API returns 500
+→ Check: vercel logs
+
+═══════════════════════════════════════════════════════════════════════
+
+## 📞 NEED HELP?
+
+Zalo: 0929501116
+Website: https://hailamdev.space
+
+═══════════════════════════════════════════════════════════════════════

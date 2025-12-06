@@ -5,16 +5,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trò chơi Lì xì may mắn</title>
     <link rel="stylesheet" href="css/xh.css">
+    <link rel="stylesheet" href="css/database-features.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .player-form {
+            margin: 20px auto;
+            max-width: 400px;
+            text-align: left;
+        }
+        .player-form label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #FFD700;
+            font-weight: bold;
+        }
+        .player-form input,
+        .player-form select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #FFD700;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .leaderboard-section,
+        .stats-section {
+            margin: 30px auto;
+            max-width: 600px;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #FFD700;
+        }
+        .leaderboard-list {
+            margin-top: 15px;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        .leaderboard-item .rank {
+            font-size: 20px;
+            min-width: 40px;
+        }
+        .leaderboard-item .name {
+            flex: 1;
+            padding: 0 15px;
+            font-weight: bold;
+        }
+        .leaderboard-item .amount {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        .stat-item i {
+            font-size: 30px;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFD700;
+            margin: 5px 0;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #ccc;
+        }
+        .lixi-amount {
+            color: #FFD700;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+    </style>
 </head>
 <body>
     
     <h1>Trò chơi Lì xì may mắn</h1>
+    
+    <!-- Form nhập thông tin -->
+    <div class="player-form">
+        <label for="playerName">Tên của bạn:</label>
+        <input type="text" id="playerName" placeholder="Nhập tên của bạn" required>
+        
+        <label for="age">Chọn độ tuổi:</label>
+        <select id="age" required>
+            <option value="">-- Chọn độ tuổi --</option>
+            <option value="kid">Trẻ em (dưới 12 tuổi)</option>
+            <option value="teen">Thanh thiếu niên (12-17 tuổi)</option>
+            <option value="adult">Người lớn (18-59 tuổi)</option>
+            <option value="senior">Người cao tuổi (60+ tuổi)</option>
+        </select>
+    </div>
+    
     <button id="lixi-button" role="button" class="golden-button" onclick="giveLuckyMoney()"><span class="golden-text">Nhận Lì Xì</span></button>
     <div id="fireworks" class="hidden"></div>
     <p id="lixi-amount"></p>
     <img id="celebrationGif" class="hidden" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG5hZnR0aHpvcHRpc251cHZ5M3lsOXE2ZWU0emk5Z3JybnE1NHgzOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xTiTnqUxyWbsAXq7Ju/giphy.gif" alt="Chúc mừng" />
 
+    <!-- Thống kê -->
+    <div class="stats-section" id="lixi-stats">
+        <h3><i class="fas fa-chart-bar"></i> Thống Kê Lì Xì</h3>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <i class="fas fa-spinner fa-spin"></i>
+                <div class="stat-label">Đang tải...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bảng xếp hạng -->
+    <div class="leaderboard-section" id="leaderboard">
+        <h3><i class="fas fa-trophy"></i> Top 10 Người May Mắn Nhất</h3>
+        <div class="leaderboard-list">
+            <p style="text-align: center; color: #ccc;">
+                <i class="fas fa-spinner fa-spin"></i> Đang tải...
+            </p>
+        </div>
+    </div>
+
     <script src="js/xh.js"></script>
+    <script src="js/lixi.js"></script>
     <canvas id="canvas"></canvas>
 
 </body>

@@ -1,0 +1,26 @@
+{
+  "name": "happy-new-year-2026",
+  "version": "1.0.0",
+  "description": "Happy New Year 2026 - Web Tết with games and lucky money",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "vercel --prod"
+  },
+  "type": "module",
+  "dependencies": {
+    "ioredis": "^5.3.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  },
+  "keywords": [
+    "happy-new-year",
+    "tet",
+    "vietnam",
+    "lixi"
+  ],
+  "author": "Nguyen Xuan Hai",
+  "license": "MIT"
+}

@@ -1,29 +1,173 @@
-function giveLuckyMoney() {
+const API_BASE_URL = window.location.origin;
+
+// Hàm format tiền VND
+function formatMoney(amount) {
+    return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    }).format(amount);
+}
+
+// Hàm lưu lì xì vào database
+async function saveLixiToDatabase(name, amount, ageGroup) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/lixi`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, amount, ageGroup })
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error saving lixi:', error);
+        return { success: false };
+    }
+}
+
+// Hàm load bảng xếp hạng
+async function loadLeaderboard() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/lixi?action=leaderboard`);
+        const data = await response.json();
+        
+        if (data.success && data.leaderboard) {
+            displayLeaderboard(data.leaderboard);
+        }
+    } catch (error) {
+        console.error('Error loading leaderboard:', error);
+    }
+}
+
+// Hiển thị bảng xếp hạng
+function displayLeaderboard(leaderboard) {
+    const leaderboardDiv = document.getElementById('leaderboard');
+    if (!leaderboardDiv) return;
+    
+    let html = '<h3><i class="fas fa-trophy"></i> Top 10 Người May Mắn Nhất</h3><div class="leaderboard-list">';
+    
+    if (leaderboard.length === 0) {
+        html += '<p style="text-align: center; color: #ccc;">Chưa có người chơi nào. Hãy là người đầu tiên!</p>';
+    } else {
+        leaderboard.forEach((entry, index) => {
+            const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
+            html += `
+                <div class="leaderboard-item">
+                    <span class="rank">${medal}</span>
+                    <span class="name">${entry.name}</span>
+                    <span class="amount">${formatMoney(entry.amount)}</span>
+                </div>
+            `;
+        });
+    }
+    
+    html += '</div>';
+    leaderboardDiv.innerHTML = html;
+}
+
+// Hàm load thống kê
+async function loadStats() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/lixi?action=stats`);
+        const data = await response.json();
+        
+        if (data.success) {
+            displayStats(data);
+        }
+    } catch (error) {
+        console.error('Error loading stats:', error);
+    }
+}
+
+// Hiển thị thống kê
+function displayStats(stats) {
+    const statsDiv = document.getElementById('lixi-stats');
+    if (!statsDiv) return;
+    
+    statsDiv.innerHTML = `
+        <h3><i class="fas fa-chart-bar"></i> Thống Kê Lì Xì</h3>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <i class="fas fa-gift"></i>
+                <div class="stat-value">${stats.totalLixi || 0}</div>
+                <div class="stat-label">Lì xì đã phát</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <div class="stat-value">${formatMoney(stats.totalAmount || 0)}</div>
+                <div class="stat-label">Tổng tiền</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <div class="stat-value">${stats.players || 0}</div>
+                <div class="stat-label">Người chơi</div>
+            </div>
+        </div>
+    `;
+}
+
+async function giveLuckyMoney() {
+    const playerName = document.getElementById("playerName").value.trim();
+    const ageGroup = document.getElementById("age").value;
+    
+    // Validate
+    if (!playerName) {
+        alert("Vui lòng nhập tên của bạn!");
+        return;
+    }
+    
+    if (!ageGroup) {
+        alert("Vui lòng chọn độ tuổi!");
+        return;
+    }
+    
     // Hiển thị hiệu ứng pháo hoa
     const fireworks = document.getElementById("fireworks");
     const lixiButton = document.getElementById("lixi-button");
     const amountText = document.getElementById("lixi-amount");
 
-
-    // Tạo số tiền ngẫu nhiên từ 1,000 đến 50,000 và đảm bảo là số chẵn
-    let money = Math.floor(Math.random() * 25) * 200 + 1000;
-
-    // Định dạng số tiền với dấu phẩy
-    let formattedMoney = money.toLocaleString() + 'đ';
+    // Tạo số tiền ngẫu nhiên
+    const amounts = [10000, 20000, 50000, 100000, 200000, 500000, 1000000];
+    let money = amounts[Math.floor(Math.random() * amounts.length)];
 
     // Hiển thị số tiền nhận được
-    amountText.textContent = `Bạn nhận được: ${formattedMoney}`;
-    amountText.style.color = "green";
+    amountText.innerHTML = `🎉 Chúc mừng <strong>${playerName}</strong>!<br>Bạn nhận được: <span class="lixi-amount">${formatMoney(money)}</span>`;
 
     // Ẩn nút nhận lì xì
-    lixiButton.disabled = true; // Vô hiệu hóa nút
-    lixiButton.textContent = "Đã nhận lì xì"; // Thay đổi văn bản nút
-        const celebrationGif = document.getElementById("celebrationGif");
-    celebrationGif.classList.remove("hidden"); // Hiển thị GIF
+    lixiButton.disabled = true;
+    lixiButton.innerHTML = '<span class="golden-text">Đã nhận lì xì</span>';
+    
+    const celebrationGif = document.getElementById("celebrationGif");
+    celebrationGif.classList.remove("hidden");
 
     // Tắt hiệu ứng pháo hoa sau khi nhận lì xì
-    fireworks.style.display = "none"; // Ẩn phần tử pháo hoa nếu cần
+    fireworks.style.display = "none";
+    
+    // Lưu vào database
+    const result = await saveLixiToDatabase(playerName, money, ageGroup);
+    
+    if (result.success) {
+        // Reload bảng xếp hạng và thống kê
+        setTimeout(() => {
+            loadLeaderboard();
+            loadStats();
+        }, 500);
+        
+        // Hiển thị thông báo xếp hạng
+        if (result.rank) {
+            setTimeout(() => {
+                amountText.innerHTML += `<br><small style="color: #FFD700;">🏆 Bạn đang xếp hạng #${result.rank} trong bảng xếp hạng!</small>`;
+            }, 1000);
+        }
+    }
 }
+
+// Load dữ liệu khi trang được tải
+window.addEventListener('DOMContentLoaded', function() {
+    loadLeaderboard();
+    loadStats();
+});
     //<![CDATA[
         var pictureSrc = "../img/coin.png"; //Link ảnh hoa muốn hiển thị trên web
         var pictureWidth = 35; //Chiều rộng của hoa mai or đào
