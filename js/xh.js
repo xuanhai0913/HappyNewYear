@@ -162,9 +162,9 @@ async function giveLuckyMoney() {
     // Hiển thị số tiền nhận được
     amountText.innerHTML = `🎉 Chúc mừng <strong>${playerName}</strong>!<br>Bạn nhận được: <span class="lixi-amount">${formatMoney(money)}</span>`;
 
-    // Ẩn nút nhận lì xì
+    // Tạm thời vô hiệu hóa nút
     lixiButton.disabled = true;
-    lixiButton.innerHTML = '<span class="golden-text">Đã nhận lì xì</span>';
+    lixiButton.innerHTML = '<span class="golden-text">⏳ Đang xử lý...</span>';
     
     const celebrationGif = document.getElementById("celebrationGif");
     celebrationGif.classList.remove("hidden");
@@ -189,6 +189,58 @@ async function giveLuckyMoney() {
             }, 1000);
         }
     }
+    
+    // Check if there are more turns available
+    setTimeout(async () => {
+        await checkRemainingTurns();
+    }, 1500);
+}
+
+// Check remaining turns after drawing
+async function checkRemainingTurns() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/game-turns?action=checkLixiTurns`);
+        const data = await response.json();
+        
+        const lixiButton = document.getElementById("lixi-button");
+        const amountText = document.getElementById("lixi-amount");
+        
+        if (data.canPlay && data.turnsLeft > 0) {
+            // Still have turns, show "Draw Again" button
+            lixiButton.disabled = false;
+            lixiButton.innerHTML = '<span class="golden-text">🎁 Rút tiếp (' + data.turnsLeft + ' lượt)</span>';
+            
+            // Add info about remaining turns
+            const currentText = amountText.innerHTML;
+            amountText.innerHTML = currentText + `<br><p style="color: #00FF00; font-size: 18px; margin-top: 15px; animation: pulse 2s infinite;">
+                ✨ Bạn còn <strong>${data.turnsLeft}</strong> lượt rút lì xì! Nhấn nút để tiếp tục!
+            </p>`;
+            
+            // Add pulse animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes pulse {
+                    0%, 100% { opacity: 1; transform: scale(1); }
+                    50% { opacity: 0.8; transform: scale(1.05); }
+                }
+            `;
+            if (!document.getElementById('pulse-style')) {
+                style.id = 'pulse-style';
+                document.head.appendChild(style);
+            }
+        } else {
+            // No more turns
+            lixiButton.disabled = true;
+            lixiButton.innerHTML = '<span class="golden-text">Đã hết lượt</span>';
+            
+            const currentText = amountText.innerHTML;
+            amountText.innerHTML = currentText + `<br><p style="color: #FFD700; font-size: 16px; margin-top: 15px;">
+                🎮 Chơi <strong>Kéo Búa Bao</strong> để nhận thêm lượt!
+            </p>`;
+        }
+    } catch (error) {
+        console.error('Error checking remaining turns:', error);
+    }
 }
 
 // Check turns on page load
@@ -203,9 +255,42 @@ async function checkTurnsOnLoad() {
         if (!data.canPlay) {
             lixiButton.disabled = true;
             lixiButton.innerHTML = '<span class="golden-text">Đã hết lượt</span>';
-            amountText.innerHTML = `<p style="color: #FFD700; font-size: 18px;">${data.message}</p>`;
-        } else if (data.extraTurns > 0) {
-            amountText.innerHTML = `<p style="color: #00FF00; font-size: 18px;">🎮 Bạn có ${data.turnsLeft} lượt rút lì xì (${data.extraTurns} lượt thưởng từ Kéo Búa Bao)!</p>`;
+            amountText.innerHTML = `
+                <p style="color: #FFD700; font-size: 18px;">${data.message}</p>
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255, 215, 0, 0.1); border: 2px solid #FFD700; border-radius: 10px;">
+                    <p style="color: #FFF; font-size: 16px; margin: 10px 0;">
+                        🎮 <strong>Muốn thêm lượt?</strong> Chơi Kéo Búa Bao!
+                    </p>
+                    <a href="kbb.html" style="
+                        display: inline-block;
+                        background: linear-gradient(135deg, #FFD700, #FFA500);
+                        color: #000;
+                        padding: 10px 30px;
+                        border-radius: 25px;
+                        text-decoration: none;
+                        font-weight: bold;
+                        font-size: 18px;
+                        margin-top: 10px;
+                        transition: transform 0.3s ease;
+                    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        ✊ Chơi Ngay
+                    </a>
+                </div>
+            `;
+        } else {
+            // Update button text with turn count
+            lixiButton.innerHTML = `<span class="golden-text">🎁 Nhận Lì Xì (${data.turnsLeft} lượt)</span>`;
+            
+            if (data.extraTurns > 0) {
+                amountText.innerHTML = `
+                    <p style="color: #00FF00; font-size: 18px;">
+                        🎮 Bạn có <strong>${data.turnsLeft}</strong> lượt rút lì xì 
+                        (bao gồm <strong style="color: #FFD700;">${data.extraTurns}</strong> lượt thưởng từ Kéo Búa Bao)!
+                    </p>
+                `;
+            } else {
+                amountText.innerHTML = `<p style="color: #FFD700; font-size: 18px;">🎁 Bạn có ${data.turnsLeft} lượt rút lì xì hôm nay!</p>`;
+            }
         }
     } catch (error) {
         console.error('Error checking turns:', error);
