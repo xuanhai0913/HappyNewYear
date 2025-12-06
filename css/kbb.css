@@ -54,6 +54,65 @@
     box-shadow: var(--shadow-glow);
 }
 
+/* Header & Logo */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px 0;
+    width: 100%;
+    z-index: 10;
+    position: relative;
+}
+
+header a {
+    display: block;
+}
+
+.logo {
+    max-width: 280px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(239, 200, 126, 0.3));
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logo:hover {
+    transform: scale(1.05) rotate(-2deg);
+    filter: drop-shadow(0 0 20px rgba(239, 200, 126, 0.6));
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    padding: 30px 20px;
+    margin-top: 40px;
+    text-align: center;
+    background: linear-gradient(to top, rgba(28, 32, 51, 0.95), rgba(28, 32, 51, 0.6));
+    border-top: 1px solid var(--glass-border);
+    position: relative;
+    z-index: 10;
+}
+
+footer p {
+    margin: 8px 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+footer p:first-child {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
 /* Game Header */
 .game-header {
     text-align: center;
@@ -155,7 +214,8 @@
     backdrop-filter: blur(10px);
 }
 
-.player-side, .computer-side {
+.player-side,
+.computer-side {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -316,7 +376,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255,204,0,0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 204, 0, 0.3) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -441,22 +501,32 @@
 
 /* Animations */
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateY(0);
     }
+
     40% {
         transform: translateY(-15px);
     }
+
     60% {
         transform: translateY(-7px);
     }
 }
 
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 1;
         transform: scale(1);
     }
+
     50% {
         opacity: 0.8;
         transform: scale(1.05);
@@ -464,13 +534,24 @@
 }
 
 @keyframes shake {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateX(0);
     }
-    10%, 30%, 50%, 70%, 90% {
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
         transform: translateX(-5px);
     }
-    20%, 40%, 60%, 80% {
+
+    20%,
+    40%,
+    60%,
+    80% {
         transform: translateX(5px);
     }
 }
@@ -479,18 +560,23 @@
     0% {
         transform: scale(0.8);
     }
+
     50% {
         transform: scale(1.1);
     }
+
     100% {
         transform: scale(1);
     }
 }
 
 @keyframes glow-pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.5;
     }
+
     50% {
         opacity: 1;
     }
@@ -502,6 +588,7 @@
         transform: translateX(0) rotate(0deg);
         opacity: 1;
     }
+
     100% {
         top: 100vh;
         transform: translateX(100px) rotate(720deg);
@@ -510,18 +597,24 @@
 }
 
 @keyframes thinking {
-    0%, 100% {
+
+    0%,
+    100% {
         content: '🤔';
     }
+
     20% {
         content: '✊';
     }
+
     40% {
         content: '🖐️';
     }
+
     60% {
         content: '✌️';
     }
+
     80% {
         content: '🤔';
     }
@@ -532,9 +625,12 @@
 }
 
 @keyframes thinking-emoji {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.2);
     }
@@ -545,68 +641,68 @@
     .game-title {
         font-size: 2rem;
     }
-    
+
     .game-title .emoji {
         font-size: 1.8rem;
     }
-    
+
     .battle-arena {
         flex-direction: column;
         gap: 20px;
         padding: 20px;
     }
-    
+
     .vs-container {
         transform: rotate(90deg);
     }
-    
+
     .choice-display {
         width: 100px;
         height: 100px;
     }
-    
+
     .choice-display .choice-emoji {
         font-size: 3rem;
     }
-    
+
     .choices-container {
         gap: 15px;
     }
-    
+
     .choice-btn {
         width: 100px;
         height: 100px;
     }
-    
+
     .btn-emoji {
         font-size: 2.5rem;
     }
-    
+
     .btn-label {
         font-size: 0.9rem;
     }
-    
+
     .scoreboard {
         gap: 15px;
     }
-    
+
     .score-item {
         padding: 10px 15px;
     }
-    
+
     .score-icon {
         font-size: 1.5rem;
     }
-    
+
     .score-value {
         font-size: 1.5rem;
     }
-    
+
     .result-container {
         min-width: auto;
         width: 90%;
     }
-    
+
     .result-text {
         font-size: 1.2rem;
     }
@@ -617,39 +713,52 @@
         padding: 15px;
         gap: 20px;
     }
-    
+
     .game-title {
         font-size: 1.6rem;
         flex-wrap: wrap;
     }
-    
+
     .game-nav {
         flex-wrap: wrap;
         justify-content: center;
     }
-    
+
     .nav-link {
         padding: 8px 15px;
         font-size: 0.9rem;
     }
-    
+
+    .logo {
+        max-width: 200px;
+    }
+
+    footer {
+        padding: 20px 15px;
+        margin-top: 30px;
+    }
+
+    footer p:first-child {
+        font-size: 1rem;
+    }
+
     .choice-btn {
         width: 85px;
         height: 85px;
     }
-    
+
     .btn-emoji {
         font-size: 2rem;
     }
-    
+
     .btn-label {
         font-size: 0.8rem;
     }
-    
+
     .game-rules {
         padding: 15px 20px;
     }
-    
+
     .game-rules li {
         font-size: 0.9rem;
     }
@@ -660,7 +769,7 @@
     .choice-btn {
         background: rgba(30, 30, 50, 0.8);
     }
-    
+
     .score-item {
         background: rgba(30, 30, 50, 0.8);
     }
