@@ -1,11 +1,8 @@
 // Test Redis connection
 // Run: node test-redis.js
 
-import Redis from 'ioredis';
-import dotenv from 'dotenv';
-
-// Load environment variables
-dotenv.config();
+require('dotenv').config();
+const Redis = require('ioredis');
 
 const redis = new Redis(process.env.REDIS_URL);
 

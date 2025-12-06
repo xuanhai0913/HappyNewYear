@@ -8,7 +8,8 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
-    "ioredis": "^5.3.2"
+    "ioredis": "^5.3.2",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "vercel": "^33.0.0"
