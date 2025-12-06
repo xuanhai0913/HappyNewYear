@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Happy New Year 2026 - Web Tết with games and lucky money",
   "scripts": {
-    "dev": "vercel dev",
     "build": "echo 'Static site - no build needed'",
     "deploy": "vercel --prod"
   },
