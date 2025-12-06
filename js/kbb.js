@@ -25,7 +25,10 @@ const playerScoreEl = document.getElementById('player-score');
 const computerScoreEl = document.getElementById('computer-score');
 const tieScoreEl = document.getElementById('tie-score');
 const resultContainer = document.getElementById('result-container');
+const resultTextEl = document.getElementById('result-text');
+const choiceBtns = document.querySelectorAll('.choice-btn');
 // Game Control Elements
+const resetBtn = document.getElementById('reset-btn');
 const musicBtn = document.getElementById('music-btn');
 const bgMusic = document.getElementById('bg-music');
 let isMusicPlaying = true;
