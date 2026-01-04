@@ -41,10 +41,10 @@ module.exports = async (req, res) => {
 
             if (action === 'getLixiAmounts') {
                 const amountsStr = await redisClient.get('lixi_amounts');
-                const amounts = amountsStr 
-                    ? JSON.parse(amountsStr) 
+                const amounts = amountsStr
+                    ? JSON.parse(amountsStr)
                     : [10000, 20000, 50000, 100000, 200000, 500000, 1000000];
-                
+
                 return res.status(200).json({
                     success: true,
                     amounts: amounts
@@ -63,9 +63,9 @@ module.exports = async (req, res) => {
                 if (typeof count !== 'number' || count < 0) {
                     return res.status(400).json({ error: 'Invalid count' });
                 }
-                
+
                 await redisClient.set('visitor_count', count);
-                
+
                 return res.status(200).json({
                     success: true,
                     message: 'Visitor count updated',
@@ -85,7 +85,7 @@ module.exports = async (req, res) => {
                 }
 
                 await redisClient.set('lixi_amounts', JSON.stringify(validAmounts));
-                
+
                 return res.status(200).json({
                     success: true,
                     message: 'Lixi amounts updated',
@@ -106,14 +106,14 @@ module.exports = async (req, res) => {
                 }
 
                 let leaderboard = JSON.parse(leaderboardStr);
-                const userToDelete = leaderboard.find(u => u.id === userId);
-                
+                const userToDelete = leaderboard.find(u => String(u.id) === String(userId));
+
                 if (!userToDelete) {
                     return res.status(404).json({ error: 'User not found' });
                 }
 
                 // Remove user from leaderboard
-                leaderboard = leaderboard.filter(u => u.id !== userId);
+                leaderboard = leaderboard.filter(u => String(u.id) !== String(userId));
                 await redisClient.set('lixi_leaderboard', JSON.stringify(leaderboard));
 
                 // Update statistics
