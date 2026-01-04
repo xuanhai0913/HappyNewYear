@@ -31,7 +31,7 @@ async function loadLeaderboard() {
     try {
         const response = await fetch(`${API_BASE_URL}/api/lixi?action=leaderboard`);
         const data = await response.json();
-        
+
         if (data.success && data.leaderboard) {
             displayLeaderboard(data.leaderboard);
         }
@@ -44,9 +44,9 @@ async function loadLeaderboard() {
 function displayLeaderboard(leaderboard) {
     const leaderboardDiv = document.getElementById('leaderboard');
     if (!leaderboardDiv) return;
-    
+
     let html = '<h3><i class="fas fa-trophy"></i> Top 10 Người May Mắn Nhất</h3><div class="leaderboard-list">';
-    
+
     if (leaderboard.length === 0) {
         html += '<p style="text-align: center; color: #ccc;">Chưa có người chơi nào. Hãy là người đầu tiên!</p>';
     } else {
@@ -61,7 +61,7 @@ function displayLeaderboard(leaderboard) {
             `;
         });
     }
-    
+
     html += '</div>';
     leaderboardDiv.innerHTML = html;
 }
@@ -71,7 +71,7 @@ async function loadStats() {
     try {
         const response = await fetch(`${API_BASE_URL}/api/lixi?action=stats`);
         const data = await response.json();
-        
+
         if (data.success) {
             displayStats(data);
         }
@@ -84,7 +84,7 @@ async function loadStats() {
 function displayStats(stats) {
     const statsDiv = document.getElementById('lixi-stats');
     if (!statsDiv) return;
-    
+
     statsDiv.innerHTML = `
         <h3><i class="fas fa-chart-bar"></i> Thống Kê Lì Xì</h3>
         <div class="stats-grid">
@@ -110,35 +110,35 @@ function displayStats(stats) {
 async function giveLuckyMoney() {
     const playerName = document.getElementById("playerName").value.trim();
     const ageGroup = document.getElementById("age").value;
-    
+
     // Validate
     if (!playerName) {
         alert("Vui lòng nhập tên của bạn!");
         return;
     }
-    
+
     if (!ageGroup) {
         alert("Vui lòng chọn độ tuổi!");
         return;
     }
-    
+
     // Check if player can play
     try {
         const checkResponse = await fetch(`${API_BASE_URL}/api/game-turns?action=checkLixiTurns`);
         const checkData = await checkResponse.json();
-        
+
         if (!checkData.canPlay) {
             alert(checkData.message);
             return;
         }
-        
+
         // Use the turn
         const useResponse = await fetch(`${API_BASE_URL}/api/game-turns`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: 'useLixiTurn' })
         });
-        
+
         const useData = await useResponse.json();
         if (!useData.success) {
             alert(useData.message || 'Đã hết lượt chơi!');
@@ -149,7 +149,7 @@ async function giveLuckyMoney() {
         alert('Có lỗi xảy ra! Vui lòng thử lại.');
         return;
     }
-    
+
     // Hiển thị hiệu ứng pháo hoa
     const fireworks = document.getElementById("fireworks");
     const lixiButton = document.getElementById("lixi-button");
@@ -165,23 +165,65 @@ async function giveLuckyMoney() {
     // Tạm thời vô hiệu hóa nút
     lixiButton.disabled = true;
     lixiButton.innerHTML = '<span class="golden-text">⏳ Đang xử lý...</span>';
-    
+
     const celebrationGif = document.getElementById("celebrationGif");
     celebrationGif.classList.remove("hidden");
 
     // Tắt hiệu ứng pháo hoa sau khi nhận lì xì
     fireworks.style.display = "none";
-    
+
     // Lưu vào database
     const result = await saveLixiToDatabase(playerName, money, ageGroup);
-    
+
     if (result.success) {
+        // Show Meme based on amount
+        const memeContainer = document.getElementById("lixiMemeResult");
+        const memeImg = document.getElementById("lixiMemeImg");
+        const memeCaption = document.getElementById("lixiMemeCaption");
+
+        if (memeContainer && memeImg) {
+            memeContainer.classList.add("show");
+
+            // Logic for memes
+            if (money < 50000) {
+                // Low amount: Sad/Funny
+                const lowMemes = [
+                    { src: 'img/mewmituoc.png', caption: '"Huhu, sao ít dậy..."' },
+                    { src: 'img/Mewoi.png', caption: '"Ói ra lại cho tui đi!"' }
+                ];
+                const randomMeme = lowMemes[Math.floor(Math.random() * lowMemes.length)];
+                memeImg.src = randomMeme.src;
+                memeCaption.textContent = randomMeme.caption;
+            } else {
+                // High amount: Happy/Shy
+                const highMemes = [
+                    { src: 'img/mewnhanlixi.png', caption: '"Cảm ơn đại gia nha!"' },
+                    { src: 'img/mewngaingung.png', caption: '"Ngại quá à hihi..."' }
+                ];
+                const randomMeme = highMemes[Math.floor(Math.random() * highMemes.length)];
+                memeImg.src = randomMeme.src;
+                memeCaption.textContent = randomMeme.caption;
+            }
+        }
+
+        // Show Popup Meme rarely (e.g., 30% chance or if amount > 500k)
+        if (money >= 500000 || Math.random() < 0.3) {
+            setTimeout(() => {
+                const popup = document.getElementById("memePopup");
+                if (popup) {
+                    popup.classList.add("active");
+                    // Auto close after 5 seconds
+                    setTimeout(closeMemePopup, 5000);
+                }
+            }, 1000);
+        }
+
         // Reload bảng xếp hạng và thống kê
         setTimeout(() => {
             loadLeaderboard();
             loadStats();
         }, 500);
-        
+
         // Hiển thị thông báo xếp hạng
         if (result.rank) {
             setTimeout(() => {
@@ -189,7 +231,7 @@ async function giveLuckyMoney() {
             }, 1000);
         }
     }
-    
+
     // Check if there are more turns available
     setTimeout(async () => {
         await checkRemainingTurns();
@@ -201,21 +243,21 @@ async function checkRemainingTurns() {
     try {
         const response = await fetch(`${API_BASE_URL}/api/game-turns?action=checkLixiTurns`);
         const data = await response.json();
-        
+
         const lixiButton = document.getElementById("lixi-button");
         const amountText = document.getElementById("lixi-amount");
-        
+
         if (data.canPlay && data.turnsLeft > 0) {
             // Still have turns, show "Draw Again" button
             lixiButton.disabled = false;
             lixiButton.innerHTML = '<span class="golden-text">🎁 Rút tiếp (' + data.turnsLeft + ' lượt)</span>';
-            
+
             // Add info about remaining turns
             const currentText = amountText.innerHTML;
             amountText.innerHTML = currentText + `<br><p style="color: #00FF00; font-size: 18px; margin-top: 15px; animation: pulse 2s infinite;">
                 ✨ Bạn còn <strong>${data.turnsLeft}</strong> lượt rút lì xì! Nhấn nút để tiếp tục!
             </p>`;
-            
+
             // Add pulse animation
             const style = document.createElement('style');
             style.textContent = `
@@ -232,7 +274,7 @@ async function checkRemainingTurns() {
             // No more turns
             lixiButton.disabled = true;
             lixiButton.innerHTML = '<span class="golden-text">Đã hết lượt</span>';
-            
+
             const currentText = amountText.innerHTML;
             amountText.innerHTML = currentText + `<br><p style="color: #FFD700; font-size: 16px; margin-top: 15px;">
                 🎮 Chơi <strong>Kéo Búa Bao</strong> để nhận thêm lượt!
@@ -248,10 +290,10 @@ async function checkTurnsOnLoad() {
     try {
         const response = await fetch(`${API_BASE_URL}/api/game-turns?action=checkLixiTurns`);
         const data = await response.json();
-        
+
         const lixiButton = document.getElementById("lixi-button");
         const amountText = document.getElementById("lixi-amount");
-        
+
         if (!data.canPlay) {
             lixiButton.disabled = true;
             lixiButton.innerHTML = '<span class="golden-text">Đã hết lượt</span>';
@@ -280,7 +322,7 @@ async function checkTurnsOnLoad() {
         } else {
             // Update button text with turn count
             lixiButton.innerHTML = `<span class="golden-text">🎁 Nhận Lì Xì (${data.turnsLeft} lượt)</span>`;
-            
+
             if (data.extraTurns > 0) {
                 amountText.innerHTML = `
                     <p style="color: #00FF00; font-size: 18px;">
@@ -297,120 +339,127 @@ async function checkTurnsOnLoad() {
     }
 }
 
+// Popup functions using window scope for HTML onclick access
+window.closeMemePopup = function () {
+    const popup = document.getElementById("memePopup");
+    if (popup) {
+        popup.classList.remove("active");
+    }
+}
+
 // Load dữ liệu khi trang được tải
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     loadLeaderboard();
     loadStats();
     checkTurnsOnLoad();
 });
-    //<![CDATA[
-        var pictureSrc = "../img/coin.png"; //Link ảnh hoa muốn hiển thị trên web
-        var pictureWidth = 35; //Chiều rộng của hoa mai or đào
-        var pictureHeight = 35; //Chiều cao của hoa mai or đào
-        var numFlakes = 20; //Số bông hoa xuất hiện cùng một lúc trên trang web
-        var downSpeed = 0.02; //Tốc độ rơi của hoa
-        var lrFlakes = 10; //Tốc độ các bông hoa giao động từ bên trai sang bên phải và ngược lại
-    
-    
-        if (typeof (numFlakes) != 'number' || Math.round(numFlakes) != numFlakes || numFlakes < 1) {
-          numFlakes = 10;
-        }
-    
-        //draw the snowflakes
-        for (var x = 0; x < numFlakes; x++) {
-          if (document.layers) { //releave NS4 bug
-            document.write('<layer id="snFlkDiv' + x + '"><imgsrc="' + pictureSrc + '" height="' + pictureHeight + '"width="' + pictureWidth + '" alt="*" border="0"></layer>');
-          } else {
-            document.write('<div style="position:absolute; z-index:9999;"id="snFlkDiv' + x + '"><img src="' + pictureSrc + '"height="' + pictureHeight + '" width="' + pictureWidth + '" alt="*"border="0"></div>');
-          }
-        }
-    
-        //calculate initial positions (in portions of browser window size)
-        var xcoords = new Array(),
-          ycoords = new Array(),
-          snFlkTemp;
-        for (var x = 0; x < numFlakes; x++) {
-          xcoords[x] = (x + 1) / (numFlakes + 1);
-          do {
-            snFlkTemp = Math.round((numFlakes - 1) * Math.random());
-          } while (typeof (ycoords[snFlkTemp]) == 'number');
-          ycoords[snFlkTemp] = x / numFlakes;
-        }
-    
-        //now animate
-        function flakeFall() {
-          if (!getRefToDivNest('snFlkDiv0')) {
-            return;
-          }
-          var scrWidth = 0,
-            scrHeight = 0,
-            scrollHeight = 0,
-            scrollWidth = 0;
-          //find screen settings for all variations. doing this every time allows for resizing and scrolling
-          if (typeof (window.innerWidth) == 'number') {
-            scrWidth = window.innerWidth;
-            scrHeight = window.innerHeight;
-          } else {
-            if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-              scrWidth = document.documentElement.clientWidth;
-              scrHeight = document.documentElement.clientHeight;
-            } else {
-              if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+//<![CDATA[
+var pictureSrc = "../img/coin.png"; //Link ảnh hoa muốn hiển thị trên web
+var pictureWidth = 35; //Chiều rộng của hoa mai or đào
+var pictureHeight = 35; //Chiều cao của hoa mai or đào
+var numFlakes = 20; //Số bông hoa xuất hiện cùng một lúc trên trang web
+var downSpeed = 0.02; //Tốc độ rơi của hoa
+var lrFlakes = 10; //Tốc độ các bông hoa giao động từ bên trai sang bên phải và ngược lại
+
+
+if (typeof (numFlakes) != 'number' || Math.round(numFlakes) != numFlakes || numFlakes < 1) {
+    numFlakes = 10;
+}
+
+//draw the snowflakes
+for (var x = 0; x < numFlakes; x++) {
+    if (document.layers) { //releave NS4 bug
+        document.write('<layer id="snFlkDiv' + x + '"><imgsrc="' + pictureSrc + '" height="' + pictureHeight + '"width="' + pictureWidth + '" alt="*" border="0"></layer>');
+    } else {
+        document.write('<div style="position:absolute; z-index:9999;"id="snFlkDiv' + x + '"><img src="' + pictureSrc + '"height="' + pictureHeight + '" width="' + pictureWidth + '" alt="*"border="0"></div>');
+    }
+}
+
+//calculate initial positions (in portions of browser window size)
+var xcoords = new Array(),
+    ycoords = new Array(),
+    snFlkTemp;
+for (var x = 0; x < numFlakes; x++) {
+    xcoords[x] = (x + 1) / (numFlakes + 1);
+    do {
+        snFlkTemp = Math.round((numFlakes - 1) * Math.random());
+    } while (typeof (ycoords[snFlkTemp]) == 'number');
+    ycoords[snFlkTemp] = x / numFlakes;
+}
+
+//now animate
+function flakeFall() {
+    if (!getRefToDivNest('snFlkDiv0')) {
+        return;
+    }
+    var scrWidth = 0,
+        scrHeight = 0,
+        scrollHeight = 0,
+        scrollWidth = 0;
+    //find screen settings for all variations. doing this every time allows for resizing and scrolling
+    if (typeof (window.innerWidth) == 'number') {
+        scrWidth = window.innerWidth;
+        scrHeight = window.innerHeight;
+    } else {
+        if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+            scrWidth = document.documentElement.clientWidth;
+            scrHeight = document.documentElement.clientHeight;
+        } else {
+            if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
                 scrWidth = document.body.clientWidth;
                 scrHeight = document.body.clientHeight;
-              }
             }
-          }
-          if (typeof (window.pageYOffset) == 'number') {
-            scrollHeight = pageYOffset;
-            scrollWidth = pageXOffset;
-          } else {
-            if (document.body && (document.body.scrollLeft || document.body.scrollTop)) {
-              scrollHeight = document.body.scrollTop;
-              scrollWidth = document.body.scrollLeft;
-            } else {
-              if (document.documentElement && (document.documentElement.scrollLeft || document.documentElement.scrollTop)) {
+        }
+    }
+    if (typeof (window.pageYOffset) == 'number') {
+        scrollHeight = pageYOffset;
+        scrollWidth = pageXOffset;
+    } else {
+        if (document.body && (document.body.scrollLeft || document.body.scrollTop)) {
+            scrollHeight = document.body.scrollTop;
+            scrollWidth = document.body.scrollLeft;
+        } else {
+            if (document.documentElement && (document.documentElement.scrollLeft || document.documentElement.scrollTop)) {
                 scrollHeight = document.documentElement.scrollTop;
                 scrollWidth = document.documentElement.scrollLeft;
-              }
             }
-          }
-          //move the snowflakes to their new position
-          for (var x = 0; x < numFlakes; x++) {
-            if (ycoords[x] * scrHeight > scrHeight - pictureHeight) {
-              ycoords[x] = 0;
-            }
-            var divRef = getRefToDivNest('snFlkDiv' + x);
-            if (!divRef) {
-              return;
-            }
-            if (divRef.style) {
-              divRef = divRef.style;
-            }
-            var oPix = document.childNodes ? 'px' : 0;
-            divRef.top = (Math.round(ycoords[x] * scrHeight) + scrollHeight) + oPix;
-            divRef.left = (Math.round(((xcoords[x] * scrWidth) - (pictureWidth / 2)) + ((scrWidth / ((numFlakes + 1) * 4)) * (Math.sin(lrFlakes * ycoords[x]) - Math.sin(3 * lrFlakes * ycoords[x])))) + scrollWidth) + oPix;
-            ycoords[x] += downSpeed;
-          }
         }
-    
-        //DHTML handlers
-        function getRefToDivNest(divName) {
-          if (document.layers) {
-            return document.layers[divName];
-          } //NS4
-          if (document[divName]) {
-            return document[divName];
-          } //NS4 also
-          if (document.getElementById) {
-            return document.getElementById(divName);
-          } //DOM (IE5+, NS6+, Mozilla0.9+, Opera)
-          if (document.all) {
-            return document.all[divName];
-          } //Proprietary DOM - IE4
-          return false;
+    }
+    //move the snowflakes to their new position
+    for (var x = 0; x < numFlakes; x++) {
+        if (ycoords[x] * scrHeight > scrHeight - pictureHeight) {
+            ycoords[x] = 0;
         }
-    
-        window.setInterval('flakeFall();', 100);
-      //]]>
-    
+        var divRef = getRefToDivNest('snFlkDiv' + x);
+        if (!divRef) {
+            return;
+        }
+        if (divRef.style) {
+            divRef = divRef.style;
+        }
+        var oPix = document.childNodes ? 'px' : 0;
+        divRef.top = (Math.round(ycoords[x] * scrHeight) + scrollHeight) + oPix;
+        divRef.left = (Math.round(((xcoords[x] * scrWidth) - (pictureWidth / 2)) + ((scrWidth / ((numFlakes + 1) * 4)) * (Math.sin(lrFlakes * ycoords[x]) - Math.sin(3 * lrFlakes * ycoords[x])))) + scrollWidth) + oPix;
+        ycoords[x] += downSpeed;
+    }
+}
+
+//DHTML handlers
+function getRefToDivNest(divName) {
+    if (document.layers) {
+        return document.layers[divName];
+    } //NS4
+    if (document[divName]) {
+        return document[divName];
+    } //NS4 also
+    if (document.getElementById) {
+        return document.getElementById(divName);
+    } //DOM (IE5+, NS6+, Mozilla0.9+, Opera)
+    if (document.all) {
+        return document.all[divName];
+    } //Proprietary DOM - IE4
+    return false;
+}
+
+window.setInterval('flakeFall();', 100);
+//]]>

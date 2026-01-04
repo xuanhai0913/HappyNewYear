@@ -272,6 +272,12 @@ function resetGame() {
     resultContainer.classList.remove('win', 'lose', 'tie');
     resultTextEl.textContent = 'Hãy chọn để bắt đầu!';
 
+    // Hide Meme
+    const memeContainer = document.getElementById("kbbMemeResult");
+    if (memeContainer) {
+        memeContainer.classList.remove("show");
+    }
+
     // Add reset animation
     resetBtn.style.transform = 'rotate(360deg)';
     setTimeout(() => {

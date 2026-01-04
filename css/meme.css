@@ -1,0 +1,159 @@
+/* Meme specific styles */
+
+/* Decoration Memes */
+.meme-deco {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none; /* Let clicks pass through */
+    transition: transform 0.3s ease;
+}
+
+.meme-deco:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.meme-corner-left {
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5));
+}
+
+.meme-sitting {
+    position: absolute;
+    bottom: -40px;
+    right: -20px;
+    width: 120px;
+    height: auto;
+    z-index: 5;
+    transform: rotate(-10deg);
+}
+
+/* Result Memes Container */
+.meme-result-container {
+    display: none; /* Hidden by default */
+    margin-top: 20px;
+    text-align: center;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.meme-result-container.show {
+    display: block;
+}
+
+.meme-result-img {
+    max-width: 250px;
+    height: auto;
+    border-radius: 15px;
+    border: 3px solid #FFD700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+}
+
+/* Modal Popup for Lixi */
+.meme-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.meme-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.meme-popup-content {
+    position: relative;
+    background: transparent;
+    text-align: center;
+    transform: scale(0.5);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 90%;
+}
+
+.meme-popup-overlay.active .meme-popup-content {
+    transform: scale(1);
+}
+
+.meme-popup-img {
+    max-width: 100%;
+    width: 350px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+    animation: float 3s ease-in-out infinite;
+}
+
+.meme-popup-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Game Result specific adjustments */
+.result-meme-wrapper {
+    margin: 15px auto;
+    position: relative;
+    display: inline-block;
+}
+
+.meme-caption {
+    background: rgba(0, 0, 0, 0.7);
+    color: #FFD700;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-top: -10px;
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+/* Animations */
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    80% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .meme-corner-left {
+        width: 100px;
+    }
+    .meme-sitting {
+        width: 80px;
+    }
+    .meme-result-img {
+        max-width: 200px;
+    }
+}

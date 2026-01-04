@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +14,14 @@
             max-width: 400px;
             text-align: left;
         }
+
         .player-form label {
             display: block;
             margin: 10px 0 5px;
             color: #FFD700;
             font-weight: bold;
         }
+
         .player-form input,
         .player-form select {
             width: 100%;
@@ -28,6 +31,7 @@
             font-size: 16px;
             box-sizing: border-box;
         }
+
         .leaderboard-section,
         .stats-section {
             margin: 30px auto;
@@ -37,9 +41,11 @@
             border-radius: 10px;
             border: 2px solid #FFD700;
         }
+
         .leaderboard-list {
             margin-top: 15px;
         }
+
         .leaderboard-item {
             display: flex;
             justify-content: space-between;
@@ -49,59 +55,70 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
         }
+
         .leaderboard-item .rank {
             font-size: 20px;
             min-width: 40px;
         }
+
         .leaderboard-item .name {
             flex: 1;
             padding: 0 15px;
             font-weight: bold;
         }
+
         .leaderboard-item .amount {
             color: #FFD700;
             font-weight: bold;
         }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
+
         .stat-item {
             text-align: center;
             padding: 15px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
         }
+
         .stat-item i {
             font-size: 30px;
             color: #FFD700;
             margin-bottom: 10px;
         }
+
         .stat-value {
             font-size: 24px;
             font-weight: bold;
             color: #FFD700;
             margin: 5px 0;
         }
+
         .stat-label {
             font-size: 14px;
             color: #ccc;
         }
+
         .lixi-amount {
             color: #FFD700;
             font-size: 28px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
+
 <body>
-    
+
     <h1>Trò chơi Lì xì may mắn</h1>
-    
+
     <!-- Info Box -->
-    <div style="max-width: 600px; margin: 20px auto; padding: 15px; background: rgba(255, 215, 0, 0.15); border: 2px solid #FFD700; border-radius: 10px; text-align: center;">
+    <div
+        style="max-width: 600px; margin: 20px auto; padding: 15px; background: rgba(255, 215, 0, 0.15); border: 2px solid #FFD700; border-radius: 10px; text-align: center;">
         <h3 style="color: #FFD700; margin-top: 0;">📢 Quy Tắc Chơi</h3>
         <p style="color: #FFF; font-size: 16px; line-height: 1.6;">
             🎁 <strong>1 lượt rút lì xì / 1 ngày</strong> (theo IP)<br>
@@ -110,12 +127,12 @@
             ❌ <strong>Thua</strong> = Bị cấm chơi 15 phút
         </p>
     </div>
-    
+
     <!-- Form nhập thông tin -->
     <div class="player-form">
         <label for="playerName">Tên của bạn:</label>
         <input type="text" id="playerName" placeholder="Nhập tên của bạn" required>
-        
+
         <label for="age">Chọn độ tuổi:</label>
         <select id="age" required>
             <option value="">-- Chọn độ tuổi --</option>
@@ -125,11 +142,22 @@
             <option value="senior">Người cao tuổi (60+ tuổi)</option>
         </select>
     </div>
-    
-    <button id="lixi-button" role="button" class="golden-button" onclick="giveLuckyMoney()"><span class="golden-text">Nhận Lì Xì</span></button>
+
+    <button id="lixi-button" role="button" class="golden-button" onclick="giveLuckyMoney()"><span
+            class="golden-text">Nhận Lì Xì</span></button>
     <div id="fireworks" class="hidden"></div>
     <p id="lixi-amount"></p>
-    <img id="celebrationGif" class="hidden" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG5hZnR0aHpvcHRpc251cHZ5M3lsOXE2ZWU0emk5Z3JybnE1NHgzOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xTiTnqUxyWbsAXq7Ju/giphy.gif" alt="Chúc mừng" />
+    <img id="celebrationGif" class="hidden"
+        src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG5hZnR0aHpvcHRpc251cHZ5M3lsOXE2ZWU0emk5Z3JybnE1NHgz9ZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xTiTnqUxyWbsAXq7Ju/giphy.gif"
+        alt="Chúc mừng" />
+
+    <!-- Meme Result Container -->
+    <div id="lixiMemeResult" class="meme-result-container">
+        <div class="result-meme-wrapper">
+            <img id="lixiMemeImg" src="" alt="Meme" class="meme-result-img">
+            <div id="lixiMemeCaption" class="meme-caption"></div>
+        </div>
+    </div>
 
     <!-- Thống kê -->
     <div class="stats-section" id="lixi-stats">
@@ -156,5 +184,19 @@
     <script src="js/lixi.js"></script>
     <canvas id="canvas"></canvas>
 
-</body>
+    </style>
+    <link rel="stylesheet" href="css/meme.css">
+    </head>
+
+    <body>
+
+        <!-- Meme Popup Overlay -->
+        <div id="memePopup" class="meme-popup-overlay">
+            <div class="meme-popup-content">
+                <div class="meme-popup-close" onclick="closeMemePopup()">×</div>
+                <img src="img/MewpopupLiXi.png" alt="Chúc Mừng" class="meme-popup-img">
+                <h2 style="color: #FFD700; text-shadow: 2px 2px 4px #000; margin-top: 10px;">Lì Xì Tới Tay!!</h2>
+            </div>
+        </div>
+
 </html>
