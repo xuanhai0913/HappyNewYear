@@ -183,7 +183,8 @@ body {
 
 #game-canvas {
     display: block;
-    background: url('../img/pvz/background/lawn.png') center/cover no-repeat;
+    background: url('../img/pvz/background/lawn.png') center center no-repeat;
+    background-size: 100% 100%;
     border-radius: 16px;
     box-shadow: var(--shadow);
     cursor: crosshair;
@@ -246,8 +247,15 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 .action-btn {
@@ -345,16 +353,18 @@ body {
 }
 
 @keyframes float-lixi {
-    0% { 
-        opacity: 1; 
-        transform: translateY(0) scale(1); 
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
-    50% { 
-        transform: translateY(-30px) scale(1.2); 
+
+    50% {
+        transform: translateY(-30px) scale(1.2);
     }
-    100% { 
-        opacity: 0; 
-        transform: translateY(-60px) scale(0.5); 
+
+    100% {
+        opacity: 0;
+        transform: translateY(-60px) scale(0.5);
     }
 }
 
@@ -363,22 +373,22 @@ body {
     .game-container {
         flex-direction: column;
     }
-    
+
     .plant-toolbar {
         width: 100%;
         flex-direction: row;
     }
-    
+
     .plant-cards {
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
     }
-    
+
     .plant-card {
         width: 100px;
     }
-    
+
     #game-canvas {
         width: 100%;
         height: auto;
@@ -391,24 +401,24 @@ body {
         gap: 0.5rem;
         padding: 0.8rem;
     }
-    
+
     .game-header h1 {
         font-size: 1.3rem;
     }
-    
+
     .header-stats {
         font-size: 1rem;
     }
-    
+
     .plant-card img {
         width: 45px;
         height: 45px;
     }
-    
+
     .overlay-content h2 {
         font-size: 1.8rem;
     }
-    
+
     .action-btn {
         padding: 0.8rem 1.5rem;
         font-size: 1rem;
