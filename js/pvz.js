@@ -200,7 +200,8 @@ class Plant {
     }
 
     shoot() {
-        const projectile = new Projectile(this.x + 40, this.y + 30, this.row);
+        // Spawn projectile at mouth/center of peashooter (not below)
+        const projectile = new Projectile(this.x + 40, this.y, this.row);
         gameState.projectiles.push(projectile);
     }
 
@@ -712,11 +713,14 @@ function setupEventListeners() {
         }
     });
 
-    // Canvas hover - show preview
+    // Canvas hover - show preview and track mouse for lixi glow
     canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         const x = (e.clientX - rect.left) * (canvas.width / rect.width);
         const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+        // Track mouse position for lixi glow effect
+        gameState.mousePos = { x, y };
 
         const col = Math.floor(x / CONFIG.CELL_WIDTH);
         const row = Math.floor(y / CONFIG.CELL_HEIGHT);

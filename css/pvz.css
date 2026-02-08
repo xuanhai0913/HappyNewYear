@@ -24,8 +24,165 @@ body {
     overflow-x: hidden;
 }
 
-/* ============ HEADER ============ */
-.game-header {
+/* ============ HEADER - BRUTALIST STYLE ============ */
+.game-header.brutalist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #1e1b4b 0%, #2e1065 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-bottom: 4px solid #bef264;
+    min-height: 70px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: scale(1.1);
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 0 #f472b6);
+}
+
+.logo-link-center {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.logo-link-center:hover {
+    transform: scale(1.05);
+}
+
+.logo-center {
+    height: 50px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    filter: drop-shadow(3px 3px 0 #f472b6);
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0d0d1a;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background: #bef264;
+    border: 2px solid #bef264;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    font-size: 0.85rem;
+    box-shadow: 4px 4px 0 #f472b6;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #f472b6;
+}
+
+.back-arrow {
+    font-weight: bold;
+}
+
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.game-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-shadow: 3px 3px 0 #f472b6;
+}
+
+.vs-text {
+    font-size: 1.2rem;
+    color: #f472b6;
+    padding: 0 0.5rem;
+    text-shadow: none;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    background: #1e1b4b;
+    border: 2px solid #bef264;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #bef264;
+    letter-spacing: 0.1em;
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.stat-box.lixi .stat-value {
+    color: #fbbf24;
+}
+
+.stat-box.wave .stat-value {
+    color: #38bdf8;
+}
+
+.fullscreen-btn.brutalist {
+    background: #f472b6;
+    color: #0d0d1a;
+    border: 2px solid #f472b6;
+    font-size: 1.3rem;
+    padding: 0.5rem 0.7rem;
+    box-shadow: 4px 4px 0 #bef264;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.fullscreen-btn.brutalist:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #bef264;
+}
+
+/* Keep old header styles for backwards compatibility */
+.game-header:not(.brutalist) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,23 +192,9 @@ body {
     box-shadow: var(--shadow);
 }
 
-.game-header h1 {
+.game-header:not(.brutalist) h1 {
     font-size: 1.8rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.back-btn {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.back-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
 }
 
 .header-stats {
@@ -71,137 +214,158 @@ body {
     font-weight: bold;
 }
 
-/* ============ GAME CONTAINER ============ */
+/* ============ GAME CONTAINER - BRUTALIST ============ */
 .game-container {
     display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    max-width: 1200px;
+    gap: 0;
+    padding: 0;
+    max-width: 100%;
     margin: 0 auto;
+    background: #0d0d1a;
 }
 
-/* ============ PLANT TOOLBAR ============ */
+/* ============ PLANT TOOLBAR - BRUTALIST ============ */
 .plant-toolbar {
-    width: 150px;
-    background: var(--card-bg);
-    border-radius: 16px;
-    padding: 1rem;
-    box-shadow: var(--shadow);
+    width: 80px;
+    background: rgba(30, 27, 75, 0.9);
+    border-right: 4px solid #bef264;
+    padding: 1.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .plant-toolbar h3 {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
     text-align: center;
-    color: #166534;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
+    color: #bef264;
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-weight: bold;
 }
 
 .plant-cards {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.6rem;
+    width: 100%;
+    align-items: center;
 }
 
 .plant-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0.8rem;
-    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-    border: 3px solid transparent;
-    border-radius: 12px;
+    justify-content: center;
+    padding: 0.3rem;
+    width: 60px;
+    height: 72px;
+    background: rgba(30, 27, 75, 0.8);
+    border: 2px solid #bef264;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    position: relative;
+    gap: 0.15rem;
 }
 
 .plant-card:hover {
-    transform: scale(1.05);
-    border-color: #22c55e;
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+    background: #bef264;
+    transform: translate(2px, 2px);
+}
+
+.plant-card:hover img {
+    filter: brightness(0) saturate(100%);
 }
 
 .plant-card.selected {
-    border-color: var(--primary-gold);
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+    background: #bef264;
+    box-shadow: 4px 4px 0 #f472b6;
 }
 
 .plant-card.disabled {
-    opacity: 0.5;
+    opacity: 0.3;
     cursor: not-allowed;
-    filter: grayscale(50%);
+    border-color: rgba(190, 242, 100, 0.3);
 }
 
 .plant-card img {
-    width: 60px;
-    height: 60px;
+    width: 35px;
+    height: 35px;
     object-fit: contain;
 }
 
 .plant-name {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #166534;
-    text-align: center;
-    margin-top: 0.3rem;
+    display: none;
 }
 
 .plant-cost {
-    font-size: 0.8rem;
-    color: var(--primary-red);
+    font-size: 0.6rem;
+    color: #fbbf24;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .shovel-btn {
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.8rem;
-    background: linear-gradient(135deg, #78350f, #92400e);
-    color: white;
+    width: 55px;
+    height: 55px;
+    margin-top: auto;
+    padding: 0;
+    background: #f472b6;
+    color: #0d0d1a;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: inherit;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .shovel-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(120, 53, 15, 0.4);
+    background: #bef264;
+    transform: translate(2px, 2px);
 }
 
 .shovel-btn.active {
     background: linear-gradient(135deg, #dc2626, #ef4444);
 }
 
-/* ============ GAME AREA ============ */
+/* ============ GAME AREA - BRUTALIST ============ */
 .game-area {
     position: relative;
     flex: 1;
+    padding: 1rem;
+    background: #0d0d1a;
 }
 
 #game-canvas {
     display: block;
     background: url('../img/pvz/background/lawn.png') center center no-repeat;
     background-size: 100% 100%;
-    border-radius: 16px;
-    box-shadow: var(--shadow);
+    border: 4px solid #bef264;
+    box-shadow: 8px 8px 0 #f472b6;
     cursor: crosshair;
 }
 
-/* ============ OVERLAYS ============ */
+/* ============ OVERLAYS - BRUTALIST ============ */
 .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--overlay-bg);
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    width: auto;
+    height: auto;
+    background: rgba(13, 13, 26, 0.95);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 16px;
     z-index: 100;
 }
 
@@ -212,23 +376,26 @@ body {
 .overlay-content {
     text-align: center;
     color: white;
-    padding: 2rem 3rem;
-    background: linear-gradient(135deg, rgba(22, 101, 52, 0.9), rgba(21, 128, 61, 0.9));
-    border-radius: 20px;
-    border: 4px solid var(--primary-gold);
-    box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+    padding: 2.5rem 4rem;
+    background: linear-gradient(135deg, #1e1b4b, #2e1065);
+    border: 4px solid #bef264;
+    box-shadow: 8px 8px 0 #f472b6;
 }
 
 .overlay-content h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-shadow: 3px 3px 0 #f472b6;
 }
 
 .overlay-content p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
-    opacity: 0.9;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .overlay-content.win {
@@ -409,69 +576,101 @@ body {
 
 .action-btn {
     display: inline-block;
-    padding: 1rem 2rem;
+    padding: 1rem 2.5rem;
     font-size: 1.2rem;
     font-family: inherit;
     font-weight: bold;
-    color: white;
-    background: linear-gradient(135deg, #dc2626, #b91c1c);
-    border: none;
-    border-radius: 12px;
+    color: #0d0d1a;
+    background: #f472b6;
+    border: 4px solid #f472b6;
     cursor: pointer;
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin: 0.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+    transition: all 0.2s ease;
+    box-shadow: 6px 6px 0 #bef264;
 }
 
 .action-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 #bef264;
 }
 
 .action-btn.secondary {
-    background: linear-gradient(135deg, #ca8a04, #a16207);
-    box-shadow: 0 4px 15px rgba(202, 138, 4, 0.4);
+    background: #bef264;
+    border-color: #bef264;
+    box-shadow: 6px 6px 0 #f472b6;
 }
 
-/* ============ GAME CONTROLS ============ */
+.action-btn.secondary:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 #f472b6;
+}
+
+/* ============ GAME CONTROLS - BRUTALIST ============ */
 .game-controls {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 2rem;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.3);
+    padding: 0.8rem 2rem;
+    background: #0d0d1a;
+    border-top: 4px solid #f472b6;
 }
 
 .control-btn {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
     font-family: inherit;
+    font-weight: bold;
     color: white;
-    background: linear-gradient(135deg, #374151, #4b5563);
-    border: none;
-    border-radius: 8px;
+    background: transparent;
+    border: 2px solid white;
     cursor: pointer;
-    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.2s ease;
 }
 
 .control-btn:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, #4b5563, #6b7280);
+    background: white;
+    color: #0d0d1a;
 }
 
 .game-info {
     display: flex;
     gap: 2rem;
     color: white;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 }
 
 .game-info span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     background: rgba(255, 255, 255, 0.1);
     padding: 0.5rem 1rem;
-    border-radius: 8px;
+}
+
+.level-display {
+    background: #bef264;
+    color: #0d0d1a;
+    padding: 0.3rem 0.8rem;
+    font-weight: bold;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.level-display::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #0d0d1a;
+    border-radius: 50%;
+    animation: pulse 1s ease infinite;
 }
 
 /* ============ FLOATING LIXI ============ */

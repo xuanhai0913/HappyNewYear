@@ -11,16 +11,31 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <header class="game-header">
-        <a href="index.html" class="back-btn">← Về trang chủ</a>
-        <h1>🌻 Cây vs Zombie Tết 🧟</h1>
-        <div class="header-stats">
-            <span class="lixi-count">🧧 <span id="lixi-amount">50</span></span>
-            <span class="wave-info">Đợt: <span id="wave-num">1</span>/<span id="total-waves">5</span></span>
-            <button id="fullscreen-btn" class="fullscreen-btn" title="Toàn màn hình">⛶</button>
+    <!-- Header - Brutalist Style -->
+    <header class="game-header brutalist">
+        <div class="header-left">
+            <a href="index.html" class="back-btn">
+                <span class="back-arrow">←</span> Về trang chủ
+            </a>
+        </div>
+        <div class="header-center">
+            <a href="http://hailamdev.space/" class="logo-link-center" target="_blank" title="HaiLamDev.space">
+                <img src="img/hailamdev.jpg" alt="HaiLamDev" class="logo-center">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="stat-box lixi">
+                <span class="stat-label">🧧 LÌ XÌ</span>
+                <span class="stat-value" id="lixi-amount">50</span>
+            </div>
+            <div class="stat-box wave">
+                <span class="stat-label">WAVE</span>
+                <span class="stat-value"><span id="wave-num">1</span>/<span id="total-waves">5</span></span>
+            </div>
+            <button id="fullscreen-btn" class="fullscreen-btn brutalist" title="Toàn màn hình">⛶</button>
         </div>
     </header>
+
 
     <!-- Game Container -->
     <main class="game-container" id="game-wrapper">
