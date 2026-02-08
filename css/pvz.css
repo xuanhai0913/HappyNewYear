@@ -246,6 +246,151 @@ body {
     background: linear-gradient(135deg, rgba(127, 29, 29, 0.9), rgba(153, 27, 27, 0.9));
 }
 
+.lose-tip {
+    font-size: 1rem;
+    color: #fecaca;
+    margin-top: 0.5rem;
+}
+
+/* ============ MEME IMAGES ============ */
+.meme-image {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ============ LEVEL SELECTOR ============ */
+.level-selector {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+.level-selector h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #fef3c7;
+}
+
+.level-buttons {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.level-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 3px solid transparent;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 90px;
+    font-family: inherit;
+}
+
+.level-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.level-btn.selected {
+    border-color: #fbbf24;
+    background: rgba(251, 191, 36, 0.3);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+.level-icon {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+}
+
+.level-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.level-waves {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+/* ============ FULLSCREEN BUTTON ============ */
+.fullscreen-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.fullscreen-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* ============ OVERLAY BUTTONS ============ */
+.overlay-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+/* ============ LEVEL DISPLAY ============ */
+.level-display {
+    color: #fbbf24;
+    font-weight: bold;
+}
+
+/* ============ FULLSCREEN MODE ============ */
+.game-container:fullscreen,
+.game-container:-webkit-full-screen {
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.game-container:fullscreen .game-area,
+.game-container:-webkit-full-screen .game-area {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.game-container:fullscreen #game-canvas,
+.game-container:-webkit-full-screen #game-canvas {
+    max-height: 80vh;
+    width: auto;
+}
+
 @keyframes pulse {
 
     0%,
@@ -256,6 +401,10 @@ body {
     50% {
         transform: scale(1.1);
     }
+}
+
+.action-btn.pulse {
+    animation: pulse 2s ease-in-out infinite;
 }
 
 .action-btn {

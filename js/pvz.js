@@ -24,26 +24,70 @@ const CONFIG = {
 
     // Plant stats
     PLANTS: {
-        sunflower: { health: 100, sunInterval: 8000, sunAmount: 25 },
+        sunflower: { health: 100, sunInterval: 8000, sunAmount: 50 },
         peashooter: { health: 100, shootInterval: 1500, damage: 25 },
         wallnut: { health: 400 }
     },
 
-    // Zombie stats (speed reduced for better gameplay)
+    // Zombie stats (speed further reduced for easier gameplay)
     ZOMBIES: {
-        basic: { health: 100, speed: 0.08, damage: 10, points: 10 },
-        bucket: { health: 300, speed: 0.06, damage: 15, points: 25 },
-        runner: { health: 75, speed: 0.15, damage: 8, points: 15 }
+        basic: { health: 100, speed: 0.04, damage: 10, points: 10 },
+        bucket: { health: 300, speed: 0.03, damage: 15, points: 25 },
+        runner: { health: 75, speed: 0.08, damage: 8, points: 15 }
     },
 
-    // Wave configuration
-    WAVES: [
-        { zombies: ['basic', 'basic', 'basic'], interval: 6000 },
-        { zombies: ['basic', 'basic', 'bucket', 'basic'], interval: 5000 },
-        { zombies: ['basic', 'runner', 'bucket', 'basic', 'runner'], interval: 4500 },
-        { zombies: ['bucket', 'runner', 'basic', 'bucket', 'runner', 'basic'], interval: 4000 },
-        { zombies: ['bucket', 'bucket', 'runner', 'runner', 'basic', 'basic', 'bucket'], interval: 3500 }
-    ]
+    // Level configurations
+    LEVELS: {
+        1: { // Easy - 3 waves
+            name: 'Dễ',
+            startLixi: 75,
+            waves: [
+                { zombies: ['basic', 'basic'], interval: 7000 },
+                { zombies: ['basic', 'basic', 'basic'], interval: 6000 },
+                { zombies: ['basic', 'basic', 'bucket'], interval: 5500 }
+            ]
+        },
+        2: { // Normal - 5 waves
+            name: 'Thường',
+            startLixi: 50,
+            waves: [
+                { zombies: ['basic', 'basic', 'basic'], interval: 6000 },
+                { zombies: ['basic', 'basic', 'bucket', 'basic'], interval: 5000 },
+                { zombies: ['basic', 'runner', 'bucket', 'basic', 'runner'], interval: 4500 },
+                { zombies: ['bucket', 'runner', 'basic', 'bucket', 'runner', 'basic'], interval: 4000 },
+                { zombies: ['bucket', 'bucket', 'runner', 'runner', 'basic', 'basic', 'bucket'], interval: 3500 }
+            ]
+        },
+        3: { // Hard - 7 waves
+            name: 'Khó',
+            startLixi: 50,
+            waves: [
+                { zombies: ['basic', 'basic', 'runner'], interval: 5000 },
+                { zombies: ['basic', 'bucket', 'basic', 'runner'], interval: 4500 },
+                { zombies: ['bucket', 'runner', 'bucket', 'basic', 'runner'], interval: 4000 },
+                { zombies: ['bucket', 'runner', 'bucket', 'runner', 'basic', 'basic'], interval: 3500 },
+                { zombies: ['bucket', 'bucket', 'runner', 'runner', 'bucket', 'basic'], interval: 3000 },
+                { zombies: ['bucket', 'bucket', 'runner', 'runner', 'bucket', 'runner', 'basic'], interval: 2800 },
+                { zombies: ['bucket', 'bucket', 'bucket', 'runner', 'runner', 'runner', 'basic', 'basic'], interval: 2500 }
+            ]
+        },
+        4: { // Hell - 10 waves
+            name: 'Địa ngục',
+            startLixi: 100,
+            waves: [
+                { zombies: ['basic', 'runner', 'runner'], interval: 4000 },
+                { zombies: ['bucket', 'runner', 'basic', 'runner'], interval: 3500 },
+                { zombies: ['bucket', 'bucket', 'runner', 'runner', 'basic'], interval: 3000 },
+                { zombies: ['bucket', 'runner', 'bucket', 'runner', 'runner', 'basic'], interval: 2800 },
+                { zombies: ['bucket', 'bucket', 'bucket', 'runner', 'runner', 'runner'], interval: 2500 },
+                { zombies: ['bucket', 'bucket', 'runner', 'runner', 'bucket', 'runner', 'basic'], interval: 2300 },
+                { zombies: ['bucket', 'bucket', 'bucket', 'runner', 'runner', 'runner', 'bucket'], interval: 2000 },
+                { zombies: ['bucket', 'bucket', 'bucket', 'bucket', 'runner', 'runner', 'runner', 'runner'], interval: 1800 },
+                { zombies: ['bucket', 'bucket', 'bucket', 'bucket', 'bucket', 'runner', 'runner', 'runner'], interval: 1500 },
+                { zombies: ['bucket', 'bucket', 'bucket', 'bucket', 'bucket', 'bucket', 'runner', 'runner', 'runner', 'runner'], interval: 1200 }
+            ]
+        }
+    }
 };
 
 // ============ ASSET LOADING ============
@@ -83,6 +127,8 @@ function loadAssets() {
 const gameState = {
     isRunning: false,
     isPaused: false,
+    currentLevel: 1,
+    totalWaves: 3,
     lixi: CONFIG.START_LIXI,
     score: 0,
     kills: 0,
@@ -339,8 +385,12 @@ function initGame() {
         }
     }
 
+    // Get level config
+    const levelConfig = CONFIG.LEVELS[gameState.currentLevel];
+    gameState.totalWaves = levelConfig.waves.length;
+
     // Reset state
-    gameState.lixi = CONFIG.START_LIXI;
+    gameState.lixi = levelConfig.startLixi;
     gameState.score = 0;
     gameState.kills = 0;
     gameState.currentWave = 0;
@@ -352,6 +402,9 @@ function initGame() {
     gameState.usingShovel = false;
     gameState.zombieIndex = 0;
 
+    // Update UI
+    document.getElementById('total-waves').textContent = gameState.totalWaves;
+    document.getElementById('current-level').textContent = levelConfig.name;
     updateUI();
     setupEventListeners();
 }
@@ -363,20 +416,24 @@ function startGame() {
 
     document.getElementById('start-overlay').classList.add('hidden');
 
-    // Start first wave after delay
-    setTimeout(() => startWave(), 10000);
+    // Start first wave after delay (shorter for harder levels)
+    const delayByLevel = { 1: 12000, 2: 10000, 3: 8000, 4: 6000 };
+    setTimeout(() => startWave(), delayByLevel[gameState.currentLevel] || 10000);
 
     // Start game loop
     requestAnimationFrame(gameLoop);
 }
 
 function startWave() {
-    if (gameState.currentWave >= CONFIG.WAVES.length) {
+    const levelConfig = CONFIG.LEVELS[gameState.currentLevel];
+    const waves = levelConfig.waves;
+
+    if (gameState.currentWave >= waves.length) {
         winGame();
         return;
     }
 
-    const wave = CONFIG.WAVES[gameState.currentWave];
+    const wave = waves[gameState.currentWave];
     gameState.zombieIndex = 0;
 
     document.getElementById('wave-num').textContent = gameState.currentWave + 1;
@@ -388,7 +445,7 @@ function startWave() {
                 if (gameState.zombies.length === 0) {
                     clearInterval(checkWaveComplete);
                     gameState.currentWave++;
-                    if (gameState.currentWave < CONFIG.WAVES.length) {
+                    if (gameState.currentWave < waves.length) {
                         setTimeout(() => startWave(), 5000);
                     } else {
                         setTimeout(() => winGame(), 2000);
@@ -412,7 +469,7 @@ function startWave() {
                 if (gameState.zombies.length === 0) {
                     clearInterval(checkWaveComplete);
                     gameState.currentWave++;
-                    if (gameState.currentWave < CONFIG.WAVES.length) {
+                    if (gameState.currentWave < waves.length) {
                         setTimeout(() => startWave(), 5000);
                     } else {
                         setTimeout(() => winGame(), 2000);
@@ -496,9 +553,51 @@ function render() {
         projectile.draw(ctx);
     }
 
-    // Draw suns
+    // Draw suns/lixi with glow effect
     for (const sun of gameState.suns) {
-        ctx.drawImage(ASSETS.collectibles.lixi, sun.x - 20, sun.y - 20, 40, 40);
+        const sunCenterX = sun.x;
+        const sunCenterY = sun.y;
+
+        // Check mouse proximity (using canvas mouse position)
+        let isNearMouse = false;
+        let glowIntensity = 0;
+        if (gameState.mousePos) {
+            const dist = Math.sqrt(
+                Math.pow(gameState.mousePos.x - sunCenterX, 2) +
+                Math.pow(gameState.mousePos.y - sunCenterY, 2)
+            );
+            if (dist < 80) {
+                isNearMouse = true;
+                glowIntensity = 1 - (dist / 80); // Closer = more intense
+            }
+        }
+
+        // Base pulse animation
+        const pulse = Math.sin(Date.now() / 200) * 0.15 + 1;
+        const baseSize = 40;
+        const size = isNearMouse ? baseSize * (1.2 + glowIntensity * 0.3) : baseSize * pulse;
+
+        // Draw glow effect
+        if (isNearMouse || true) {
+            ctx.save();
+            const glowSize = isNearMouse ? 15 + glowIntensity * 10 : 8;
+            ctx.shadowColor = '#fbbf24';
+            ctx.shadowBlur = glowSize;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.drawImage(ASSETS.collectibles.lixi, sun.x - size / 2, sun.y - size / 2, size, size);
+            ctx.restore();
+        } else {
+            ctx.drawImage(ASSETS.collectibles.lixi, sun.x - size / 2, sun.y - size / 2, size, size);
+        }
+
+        // Draw "Click!" hint when near
+        if (isNearMouse && glowIntensity > 0.5) {
+            ctx.fillStyle = 'rgba(251, 191, 36, 0.9)';
+            ctx.font = 'bold 12px "Baloo 2", Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Click!', sun.x, sun.y - 25);
+        }
     }
 
     // Draw placement preview
@@ -642,6 +741,26 @@ function setupEventListeners() {
     // Play again buttons
     document.getElementById('play-again-btn')?.addEventListener('click', restartGame);
     document.getElementById('retry-btn')?.addEventListener('click', restartGame);
+
+    // Level selector buttons
+    document.querySelectorAll('.level-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            gameState.currentLevel = parseInt(btn.dataset.level);
+            initGame();
+        });
+    });
+
+    // Fullscreen button
+    document.getElementById('fullscreen-btn')?.addEventListener('click', () => {
+        const gameWrapper = document.getElementById('game-wrapper');
+        if (!document.fullscreenElement) {
+            gameWrapper.requestFullscreen?.() || gameWrapper.webkitRequestFullscreen?.();
+        } else {
+            document.exitFullscreen?.() || document.webkitExitFullscreen?.();
+        }
+    });
 }
 
 function updateUI() {
@@ -690,3 +809,4 @@ function restartGame() {
 
 // ============ INITIALIZE ============
 document.addEventListener('DOMContentLoaded', initGame);
+

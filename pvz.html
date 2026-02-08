@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="css/pvz.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <!-- Header -->
     <header class="game-header">
@@ -15,12 +17,13 @@
         <h1>🌻 Cây vs Zombie Tết 🧟</h1>
         <div class="header-stats">
             <span class="lixi-count">🧧 <span id="lixi-amount">50</span></span>
-            <span class="wave-info">Đợt: <span id="wave-num">1</span>/5</span>
+            <span class="wave-info">Đợt: <span id="wave-num">1</span>/<span id="total-waves">5</span></span>
+            <button id="fullscreen-btn" class="fullscreen-btn" title="Toàn màn hình">⛶</button>
         </div>
     </header>
 
     <!-- Game Container -->
-    <main class="game-container">
+    <main class="game-container" id="game-wrapper">
         <!-- Plant Selection Toolbar -->
         <aside class="plant-toolbar">
             <h3>Chọn Cây</h3>
@@ -47,30 +50,64 @@
         <!-- Game Canvas Area -->
         <div class="game-area">
             <canvas id="game-canvas" width="900" height="500"></canvas>
-            
-            <!-- Overlays -->
+
+            <!-- Start Overlay with Level Select -->
             <div id="start-overlay" class="overlay">
-                <div class="overlay-content">
+                <div class="overlay-content start">
                     <h2>🌻 Cây vs Zombie Tết 🧟</h2>
                     <p>Bảo vệ sân vườn khỏi đám zombie!</p>
-                    <button id="start-btn" class="action-btn">▶ Bắt đầu</button>
+
+                    <div class="level-selector">
+                        <h3>🎮 Chọn cấp độ:</h3>
+                        <div class="level-buttons">
+                            <button class="level-btn selected" data-level="1">
+                                <span class="level-icon">🌱</span>
+                                <span class="level-name">Dễ</span>
+                                <span class="level-waves">3 đợt</span>
+                            </button>
+                            <button class="level-btn" data-level="2">
+                                <span class="level-icon">🌿</span>
+                                <span class="level-name">Thường</span>
+                                <span class="level-waves">5 đợt</span>
+                            </button>
+                            <button class="level-btn" data-level="3">
+                                <span class="level-icon">🌳</span>
+                                <span class="level-name">Khó</span>
+                                <span class="level-waves">7 đợt</span>
+                            </button>
+                            <button class="level-btn" data-level="4">
+                                <span class="level-icon">💀</span>
+                                <span class="level-name">Địa ngục</span>
+                                <span class="level-waves">10 đợt</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button id="start-btn" class="action-btn pulse">▶ Bắt đầu</button>
                 </div>
             </div>
 
+            <!-- Win Overlay with Meme -->
             <div id="win-overlay" class="overlay hidden">
                 <div class="overlay-content win">
+                    <img src="img/mewnhanlixi.png" alt="Mèo nhận lì xì" class="meme-image">
                     <h2>🎉 CHIẾN THẮNG! 🎉</h2>
                     <p>Bạn đã bảo vệ thành công!</p>
                     <p class="reward">+1 lượt rút Lì xì 🧧</p>
-                    <button id="play-again-btn" class="action-btn">🔄 Chơi lại</button>
-                    <a href="xh.html" class="action-btn secondary">🧧 Rút lì xì</a>
+                    <div class="overlay-buttons">
+                        <button id="play-again-btn" class="action-btn">🔄 Chơi lại</button>
+                        <a href="xh.html" class="action-btn secondary">🧧 Rút lì xì</a>
+                    </div>
                 </div>
             </div>
 
+            <!-- Lose Overlay with Meme -->
             <div id="lose-overlay" class="overlay hidden">
                 <div class="overlay-content lose">
+                    <img src="img/mewngongac.png" alt="Mèo ngỡ ngàng" class="meme-image">
                     <h2>💀 GAME OVER 💀</h2>
                     <p>Zombie đã xâm nhập!</p>
+                    <p class="lose-tip">💡 Mẹo: Đặt nhiều Hoa Mặt Trời để có tiền!</p>
                     <button id="retry-btn" class="action-btn">🔄 Thử lại</button>
                 </div>
             </div>
@@ -83,6 +120,7 @@
         <div class="game-info">
             <span>Điểm: <span id="score">0</span></span>
             <span>Zombie tiêu diệt: <span id="kills">0</span></span>
+            <span class="level-display">Cấp độ: <span id="current-level">Dễ</span></span>
         </div>
     </footer>
 
@@ -91,4 +129,5 @@
 
     <script src="js/pvz.js"></script>
 </body>
+
 </html>
