@@ -1,0 +1,416 @@
+/* =============================================
+   🌻 PLANTS VS ZOMBIES TẾT - STYLES
+   ============================================= */
+
+:root {
+    --primary-red: #dc2626;
+    --primary-gold: #fbbf24;
+    --bg-gradient: linear-gradient(135deg, #166534 0%, #15803d 50%, #22c55e 100%);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --overlay-bg: rgba(0, 0, 0, 0.85);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Baloo 2', cursive, sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ============ HEADER ============ */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #7f1d1d, #991b1b);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.game-header h1 {
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.back-btn {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.header-stats {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.header-stats span {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.lixi-count {
+    color: var(--primary-gold);
+    font-weight: bold;
+}
+
+/* ============ GAME CONTAINER ============ */
+.game-container {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ============ PLANT TOOLBAR ============ */
+.plant-toolbar {
+    width: 150px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.plant-toolbar h3 {
+    text-align: center;
+    color: #166534;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.plant-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.plant-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border: 3px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.plant-card:hover {
+    transform: scale(1.05);
+    border-color: #22c55e;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+}
+
+.plant-card.selected {
+    border-color: var(--primary-gold);
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+}
+
+.plant-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(50%);
+}
+
+.plant-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.plant-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #166534;
+    text-align: center;
+    margin-top: 0.3rem;
+}
+
+.plant-cost {
+    font-size: 0.8rem;
+    color: var(--primary-red);
+    font-weight: bold;
+}
+
+.shovel-btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #78350f, #92400e);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shovel-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(120, 53, 15, 0.4);
+}
+
+.shovel-btn.active {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+/* ============ GAME AREA ============ */
+.game-area {
+    position: relative;
+    flex: 1;
+}
+
+#game-canvas {
+    display: block;
+    background: url('../img/pvz/background/lawn.png') center/cover no-repeat;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    cursor: crosshair;
+}
+
+/* ============ OVERLAYS ============ */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 100;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay-content {
+    text-align: center;
+    color: white;
+    padding: 2rem 3rem;
+    background: linear-gradient(135deg, rgba(22, 101, 52, 0.9), rgba(21, 128, 61, 0.9));
+    border-radius: 20px;
+    border: 4px solid var(--primary-gold);
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+}
+
+.overlay-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.overlay-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.overlay-content.win {
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.9), rgba(202, 138, 4, 0.9));
+}
+
+.overlay-content.win .reward {
+    font-size: 1.5rem;
+    color: #fef3c7;
+    font-weight: bold;
+    animation: pulse 1s ease infinite;
+}
+
+.overlay-content.lose {
+    background: linear-gradient(135deg, rgba(127, 29, 29, 0.9), rgba(153, 27, 27, 0.9));
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-family: inherit;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+}
+
+.action-btn.secondary {
+    background: linear-gradient(135deg, #ca8a04, #a16207);
+    box-shadow: 0 4px 15px rgba(202, 138, 4, 0.4);
+}
+
+/* ============ GAME CONTROLS ============ */
+.game-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.control-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: white;
+    background: linear-gradient(135deg, #374151, #4b5563);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #4b5563, #6b7280);
+}
+
+.game-info {
+    display: flex;
+    gap: 2rem;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.game-info span {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+/* ============ FLOATING LIXI ============ */
+#lixi-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 200;
+}
+
+.floating-lixi {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    animation: float-lixi 2s ease-in-out forwards;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.floating-lixi img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.8));
+}
+
+@keyframes float-lixi {
+    0% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+    50% { 
+        transform: translateY(-30px) scale(1.2); 
+    }
+    100% { 
+        opacity: 0; 
+        transform: translateY(-60px) scale(0.5); 
+    }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+    .game-container {
+        flex-direction: column;
+    }
+    
+    .plant-toolbar {
+        width: 100%;
+        flex-direction: row;
+    }
+    
+    .plant-cards {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .plant-card {
+        width: 100px;
+    }
+    
+    #game-canvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .game-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.8rem;
+    }
+    
+    .game-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .header-stats {
+        font-size: 1rem;
+    }
+    
+    .plant-card img {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .overlay-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .action-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}

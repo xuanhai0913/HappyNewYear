@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌻 Cây vs Zombie Tết 🧟 - Chúc Mừng Năm Mới 2026</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/pvz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="game-header">
+        <a href="index.html" class="back-btn">← Về trang chủ</a>
+        <h1>🌻 Cây vs Zombie Tết 🧟</h1>
+        <div class="header-stats">
+            <span class="lixi-count">🧧 <span id="lixi-amount">50</span></span>
+            <span class="wave-info">Đợt: <span id="wave-num">1</span>/5</span>
+        </div>
+    </header>
+
+    <!-- Game Container -->
+    <main class="game-container">
+        <!-- Plant Selection Toolbar -->
+        <aside class="plant-toolbar">
+            <h3>Chọn Cây</h3>
+            <div class="plant-cards">
+                <div class="plant-card" data-plant="sunflower" data-cost="50">
+                    <img src="img/pvz/plants/sunflower.png" alt="Hoa Mặt Trời">
+                    <span class="plant-name">Hoa Mặt Trời</span>
+                    <span class="plant-cost">🧧 50</span>
+                </div>
+                <div class="plant-card" data-plant="peashooter" data-cost="100">
+                    <img src="img/pvz/plants/peashooter.png" alt="Bắn Đậu">
+                    <span class="plant-name">Bắn Đậu</span>
+                    <span class="plant-cost">🧧 100</span>
+                </div>
+                <div class="plant-card" data-plant="wallnut" data-cost="50">
+                    <img src="img/pvz/plants/wallnut.png" alt="Hạt Óc Chó">
+                    <span class="plant-name">Hạt Óc Chó</span>
+                    <span class="plant-cost">🧧 50</span>
+                </div>
+            </div>
+            <button id="shovel-btn" class="shovel-btn">🪓 Xẻng</button>
+        </aside>
+
+        <!-- Game Canvas Area -->
+        <div class="game-area">
+            <canvas id="game-canvas" width="900" height="500"></canvas>
+            
+            <!-- Overlays -->
+            <div id="start-overlay" class="overlay">
+                <div class="overlay-content">
+                    <h2>🌻 Cây vs Zombie Tết 🧟</h2>
+                    <p>Bảo vệ sân vườn khỏi đám zombie!</p>
+                    <button id="start-btn" class="action-btn">▶ Bắt đầu</button>
+                </div>
+            </div>
+
+            <div id="win-overlay" class="overlay hidden">
+                <div class="overlay-content win">
+                    <h2>🎉 CHIẾN THẮNG! 🎉</h2>
+                    <p>Bạn đã bảo vệ thành công!</p>
+                    <p class="reward">+1 lượt rút Lì xì 🧧</p>
+                    <button id="play-again-btn" class="action-btn">🔄 Chơi lại</button>
+                    <a href="xh.html" class="action-btn secondary">🧧 Rút lì xì</a>
+                </div>
+            </div>
+
+            <div id="lose-overlay" class="overlay hidden">
+                <div class="overlay-content lose">
+                    <h2>💀 GAME OVER 💀</h2>
+                    <p>Zombie đã xâm nhập!</p>
+                    <button id="retry-btn" class="action-btn">🔄 Thử lại</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Controls -->
+    <footer class="game-controls">
+        <button id="pause-btn" class="control-btn">⏸ Tạm dừng</button>
+        <div class="game-info">
+            <span>Điểm: <span id="score">0</span></span>
+            <span>Zombie tiêu diệt: <span id="kills">0</span></span>
+        </div>
+    </footer>
+
+    <!-- Floating Lixi Collection -->
+    <div id="lixi-container"></div>
+
+    <script src="js/pvz.js"></script>
+</body>
+</html>
