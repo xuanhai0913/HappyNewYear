@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>🎆 Bắn Pháo Hoa Tết 🧧 - Chúc Mừng Năm Mới 2026</title>
+    <meta name="description" content="Bắn pháo hoa để thu lì xì! Trò chơi Tết vui nhộn - Happy New Year 2026">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0c0a1a">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://res.cloudinary.com/dqdcqtu8m/image/upload/v1765003310/favicon_hwohfv.png"
+        type="image/png">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/phaohoa.css">
+</head>
+
+<body>
+    <div id="game-wrapper">
+
+        <!-- Header - Brutalist Style -->
+        <header class="game-header brutalist">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">
+                    <span class="back-arrow">←</span> Về trang chủ
+                </a>
+            </div>
+            <div class="header-center">
+                <a href="http://hailamdev.space/" class="logo-link-center" target="_blank" title="HaiLamDev.space">
+                    <img src="img/hailamdev.jpg" alt="HaiLamDev" class="logo-center">
+                </a>
+            </div>
+            <div class="header-right">
+                <div class="stat-box score">
+                    <span class="stat-label">🎆 ĐIỂM</span>
+                    <span class="stat-value" id="score-value">0</span>
+                </div>
+                <div class="stat-box timer" id="timer-box">
+                    <span class="stat-label">⏱ THỜI GIAN</span>
+                    <span class="stat-value"><span id="time-left">30</span>s</span>
+                </div>
+                <button id="fullscreen-btn" class="fullscreen-btn brutalist" title="Toàn màn hình">⛶</button>
+            </div>
+        </header>
+
+        <!-- Game Container -->
+        <div class="game-container">
+            <!-- Game Area -->
+            <div class="game-area">
+                <canvas id="game-canvas"></canvas>
+
+                <!-- Blast Indicator -->
+                <div id="blast-indicator">⭐ BLAST READY</div>
+
+                <!-- Start Overlay -->
+                <div class="game-overlay" id="start-overlay">
+                    <h1 class="overlay-title win">🎆 Bắn Pháo Hoa Tết 🧧</h1>
+                    <p class="overlay-subtitle">Bắn pháo hoa lên trời để thu lì xì!</p>
+
+                    <div class="target-score-display">
+                        🎯 Mục tiêu: <strong><span id="target-score">100</span> điểm</strong>
+                    </div>
+
+                    <p class="overlay-subtitle" style="font-size: 0.85rem; max-width: 400px;">
+                        🖱️ Di chuột để ngắm &bull; Click để bắn<br>
+                        🧧 Bắn trúng lì xì = +điểm &bull; ⭐ Bắn sao = BLAST<br>
+                        🔥 Combo liên tiếp = nhân điểm!
+                    </p>
+
+                    <div style="margin-bottom: 0.5rem; color: #bef264; font-size: 0.9rem;">🎮 Chọn cấp độ:</div>
+                    <div class="level-selector">
+                        <button class="level-btn selected" data-level="1">
+                            <span class="level-icon">🌱</span>
+                            <span>Dễ</span>
+                            <span class="level-sub">30 giây</span>
+                        </button>
+                        <button class="level-btn" data-level="2">
+                            <span class="level-icon">🌿</span>
+                            <span>Thường</span>
+                            <span class="level-sub">45 giây</span>
+                        </button>
+                        <button class="level-btn" data-level="3">
+                            <span class="level-icon">💀</span>
+                            <span>Khó</span>
+                            <span class="level-sub">60 giây</span>
+                        </button>
+                    </div>
+
+                    <button class="start-btn" id="start-btn">▶ Bắt Đầu</button>
+                </div>
+
+                <!-- Win Overlay -->
+                <div class="game-overlay hidden" id="win-overlay">
+                    <h1 class="overlay-title win">🎆 TUYỆT VỜI! 🎆</h1>
+                    <p class="overlay-subtitle">Pháo hoa nở rộ! Bạn nhận +1 lượt rút lì xì! 🧧</p>
+                    <div class="stats-display">
+                        <div class="stat-item">
+                            <span class="stat-item-label">Điểm</span>
+                            <span class="stat-item-value" id="win-score">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-item-label">Lì xì bắn trúng</span>
+                            <span class="stat-item-value" id="win-targets">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-item-label">Max Combo</span>
+                            <span class="stat-item-value" id="win-combo">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-item-label">Độ chính xác</span>
+                            <span class="stat-item-value" id="win-accuracy">0%</span>
+                        </div>
+                    </div>
+                    <button class="action-btn" id="play-again-btn">🔄 Chơi lại</button>
+                </div>
+
+                <!-- Lose Overlay -->
+                <div class="game-overlay hidden" id="lose-overlay">
+                    <h1 class="overlay-title lose">💥 HẾT GIỜ!</h1>
+                    <p class="overlay-subtitle">
+                        Bạn đạt <strong id="lose-score">0</strong> / <strong id="lose-goal">100</strong> điểm.
+                        Chưa đủ mục tiêu!
+                    </p>
+                    <button class="action-btn" id="retry-btn">🔄 Thử lại</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="game-footer">
+            <div class="game-controls">
+                <button class="control-btn" id="pause-btn">⏸ Tạm dừng</button>
+            </div>
+            <div class="game-info">
+                <span>Bắn trúng: <strong id="targets-hit">0</strong></span>
+                <span id="total-time-display" style="display:none;"><span id="total-time">30</span></span>
+            </div>
+            <div class="level-display">
+                <span>● Cấp độ:</span>
+                <span id="current-level">Dễ</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Game Script -->
+    <script src="js/phaohoa.js"></script>
+</body>
+
+</html>
